@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+:root {
+  /* Ground */
+  --color-paper: #f6f2e9;
+  --color-paper-raised: #fbf9f3;
+  --color-rule: #ddd4bd;
+  --color-rule-strong: #b9ac83;
+
+  /* The three load-bearing state colors. Never decorative outside status. */
+  --color-maroon: #8c1d40;
+  --color-maroon-ink: #5c1129;
+  --color-gold: #ffc627;
+  --color-gold-ink: #7a5b00;
+  --color-ink: #17140d;
+  --color-ink-soft: #4a4536;
+  --color-ink-faint: #837c65;
+
+  --font-sans: var(--font-archivo), "Archivo", ui-sans-serif, system-ui,
+    sans-serif;
+  --font-serif: var(--font-source-serif), "Source Serif 4", ui-serif,
+    Georgia, serif;
+}
+
+@theme inline {
+  --color-paper: var(--color-paper);
+  --color-paper-raised: var(--color-paper-raised);
+  --color-rule: var(--color-rule);
+  --color-rule-strong: var(--color-rule-strong);
+  --color-maroon: var(--color-maroon);
+  --color-maroon-ink: var(--color-maroon-ink);
+  --color-gold: var(--color-gold);
+  --color-gold-ink: var(--color-gold-ink);
+  --color-ink: var(--color-ink);
+  --color-ink-soft: var(--color-ink-soft);
+  --color-ink-faint: var(--color-ink-faint);
+  --font-sans: var(--font-sans);
+  --font-serif: var(--font-serif);
+}
+
+body {
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  /* The ledger's own baseline grid: ruled paper at a fixed 32px rhythm, the
+     ground every screen in this app is written on. Structural, not
+     decorative — opaque element backgrounds (cards, the sidebar, full-bleed
+     color panels) paint over it where they need a clean field. */
+  background-image: repeating-linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--color-rule) 55%, transparent) 0px,
+    color-mix(in srgb, var(--color-rule) 55%, transparent) 1px,
+    transparent 1px,
+    transparent 32px
+  );
+}
+
+* {
+  border-color: var(--color-rule);
+}
+
+::selection {
+  background-color: var(--color-maroon);
+  color: var(--color-paper-raised);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-maroon);
+  outline-offset: 2px;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-paper);
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-rule-strong);
+  border-radius: 999px;
+  border: 3px solid var(--color-paper);
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
