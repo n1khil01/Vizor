@@ -1,0 +1,398 @@
+Delivered-To: rviswes1@email.asu.edu
+Received: by 2002:a05:6359:2706:b0:2b2:7589:d77e with SMTP id lw6csp4744944rwb;
+        Tue, 1 Sep 2026 10:58:15 -0700 (PDT)
+X-Forwarded-Encrypted: i=3; AHgh+Rr7to9pc14TNI1l8b7n+3v9ZqTKqpFnl/FJwsHuyMK+zKpB+g8JC3UKvRDZdeA4Eynxb9ZKId35/w==@email.asu.edu
+X-Received: by 2002:a05:6214:c85:b0:90e:7e30:533c with SMTP id 6a1803df08f44-90e7e30539cmr236409726d6.16.1788285495199;
+        Tue, 01 Sep 2026 10:58:15 -0700 (PDT)
+ARC-Seal: i=2; a=rsa-sha256; t=1788285495; cv=fail;
+        d=google.com; s=arc-20260327;
+        b=TvZ3jEEoLAyYbz+kqorRjG3TFcp/BIZ+J0C6spiM44n3N2kbRvm+HH0hEIHQIAtUem
+         +UcCCnChdIlKmwQkecQPtmdohoRmtnvSAwGk8LAo2vkCgvJntyjxm/x3N0qiPFnx6VLB
+         vYDc9K8zJXsjV6Dl6uv0nT/3Ld8w7wHwFekJp6vwkLezMAVIp2Vf1l8JvIIhVs+Tu144
+         b2402dS8nShFBKAyIsSWAtuQDf6ARp4/Hn1zg11mpZBlCCzvknDDRg2a+DvdMLd2IRsq
+         T2KBIIEGDZsmw58qhDd5s18i+O7jlLcKxN9dbkwUnLNoIL6mDkPA+J+kfbMBDExAKevI
+         dqCg==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=message-id:list-unsubscribe-post:list-unsubscribe:to:from:subject
+         :mime-version:date:sender:dkim-signature;
+        bh=Dk4B0JNd7vlji6vQFHldV5RWdhd8DQhT1GXqG0yOcLs=;
+        fh=i09ewxRVGq1hNtmeARyqTIp3rbVbTysox9ZFMP1e/vc=;
+        b=C7IH4+U3XjGJzam7jU+eb1m6y3Hwma/J34GhbIy/i/PXJBUlmf76tQBFMFyFB9hB26
+         eDFoRGzA0yxKRQt2mFk/v5OS8dURunzv1OmlsLkVs3R6ycOz/kkxWp2pMh7Y52OH5BfF
+         7qLL1fFRdV6gCEtWQg/u9sfxMnnDk+Fmebj9qqq3aDshL53Db15xKzBlawEmhvJqVUxM
+         R/KfKqUYpoEPCJFWl0iK/AQhTuEP1pW/jSjl/za/hYfEJrnrk81X7INTsbQYLC6n4YqQ
+         F7kKxDOTJJA50EZnXF6sInSi8VfMThJq8tFQ2a19K6hE5aEhFihWlxFKb9GA9r0GiOjy
+         +LiQ==;
+        dara=google.com
+ARC-Authentication-Results: i=2; mx.google.com;
+       dkim=pass header.i=@airtableemail.com header.s=krs header.b="n7FQf3W/";
+       arc=fail (signature failed);
+       spf=pass (google.com: domain of bounce+0d5485.293f67-rviswes1=asu.edu@airtableemail.com designates 143.55.224.76 as permitted sender) smtp.mailfrom="bounce+0d5485.293f67-rviswes1=asu.edu@airtableemail.com"
+Return-Path: <bounce+0d5485.293f67-rviswes1=asu.edu@airtableemail.com>
+Received: from mxa.canada.inbound.cf-emailsecurity.net (mxa-egress002.canada.inbound.cf-emailsecurity.net. [134.195.27.51])
+        by mx.google.com with ESMTPS id 6a1803df08f44-90e968571e6si25853046d6.437.2026.09.01.10.58.15
+        for <rviswes1@email.asu.edu>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 01 Sep 2026 10:58:15 -0700 (PDT)
+Received-SPF: pass (google.com: domain of bounce+0d5485.293f67-rviswes1=asu.edu@airtableemail.com designates 143.55.224.76 as permitted sender) client-ip=143.55.224.76;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@airtableemail.com header.s=krs header.b="n7FQf3W/";
+       arc=fail (signature failed);
+       spf=pass (google.com: domain of bounce+0d5485.293f67-rviswes1=asu.edu@airtableemail.com designates 143.55.224.76 as permitted sender) smtp.mailfrom="bounce+0d5485.293f67-rviswes1=asu.edu@airtableemail.com"
+Received: from localhost (localhost [127.0.0.1])
+	by mxa.canada.inbound.cf-emailsecurity.net (Postfix) with ESMTP id 4hZD9f5LDdzKnSY
+	for <rviswes1@email.asu.edu>; Tue, 01 Sep 2026 17:58:14 +0000 (UTC)
+Received: from edge.inbound.cf-emailsecurity.net (localhost [127.0.0.1])
+        by localhost
+        with SMTP (Cloudflare Email Security 2026.8.5) id MTIZ0EQ2
+        for rviswes1@email.asu.edu;
+        Tue, 01 Sep 2026 17:58:14 +0000 (Z)
+Received: from epo-emta-prod-mta-or05.asu.edu (ec2-34-208-70-8.us-west-2.compute.amazonaws.com [34.208.70.8])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by mxa.canada.inbound.cf-emailsecurity.net (Postfix) with ESMTPS id 4hZD9f46xZzKmBV
+	for <rviswes1@email.asu.edu>; Tue, 01 Sep 2026 17:58:14 +0000 (UTC)
+Received: from mxa.canada.inbound.cf-emailsecurity.net (mxa-egress002.canada.inbound.cf-emailsecurity.net [134.195.27.51])
+	by epo-emta-prod-mta-or05.asu.edu (Postfix) with ESMTPS id ED70061478
+	for <rviswes1@asu.edu>; Tue, 01 Sep 2026 10:58:13 -0700 (MST)
+Received: from localhost (localhost [127.0.0.1])
+	by mxa.canada.inbound.cf-emailsecurity.net (Postfix) with ESMTP id 4hZD9d1lDXzVjM3
+	for <rviswes1@asu.edu>; Tue, 01 Sep 2026 17:58:13 +0000 (UTC)
+ARC-Seal: i=1; cv=none; t=1788285493; a=rsa-sha256; d=cf-emailsecurity.net; s=arc202505e;
+	 b=3R8mdco3gtxnY1jpi58bHEl+ODYDKa0rdo7l4Ng6H+P/2VgwYKxPrqChwV60V+RaV+KZxcwtn
+	  fRPESoAz8o+Lpw8ytJT0/dN87BKynN+6mJswUE+LMuZTxjPfU+sTKru9vh8eKT0OUW5mmgBrqF/
+	  bYfk02wMlSP8J8+5KEyc0J5RQp7mzCBh+/zWSGSAQu/s7vKwpwC6Adl6H/5QcUuEpoXxoOu68+y
+	  +6hKnfJNji6J1gtXh/7hcRCLxOiG380OsgvX24ST4hxlvkyZhJgX6z/LIrAx98lDGMgaNDAhC9f
+	  AKZERxNQZXLLkRjMcyGLZLY2H3yV1nCBHuBqc5zQJVvw==;
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=cf-emailsecurity.net; s=arc202505e;
+	 h=from:from:reply-to:reply-to:subject:subject:message-id:message-id:to:to:cc:mime-version
+	  :mime-version:content-type:content-type:x-area1security-disposition
+	  :x-area1security-disposition:x-cfemailsecurity-disposition
+	  :x-cfemailsecurity-disposition;
+	 bh=Dk4B0JNd7vlji6vQFHldV5RWdhd8DQhT1GXqG0yOcLs=;
+	 b=xqrrsyozoOq4b5KFiY0mefSe/Oozsl2lb86skoivCbftqh9kUTQaSe8VnEgmK1gNziPO7LITG
+	  K+m/D9i4pAZhST6GzwKJwpImUxL+4+7YwZB3sIgtCm5YVVwSMBkNrpHxUiibrthCSp3nxa65yGL
+	  xZf3Cj2I0RsC2XWcz4DEJWyOLKSC6yVGJpcymlOgX9kFl0tkYy4pznoknaOpeuECmv09420Q1pE
+	  IETCVdqw9RWsyBZVyRwpo3UOiuJ5STmQ33XAjeAHBuQTvz2vUaYafF4RaFgjInwqnqd4ObIiGf8
+	  0Nwfcz6K7l2Sm1UaYDzTZt0Yd+p1CCcGSL21ZqcXbn1g==;
+ARC-Authentication-Results: i=1; edge.inbound.cf-emailsecurity.net;
+	 dmarc=pass (p=reject) header.from=airtableemail.com;
+	 spf=pass smtp.mailfrom=airtableemail.com;
+	 dkim=pass header.i=@airtableemail.com header.s=krs header.b=n7FQf3W/
+Received-SPF: pass (edge.inbound.cf-emailsecurity.net: airtableemail.com designates 143.55.224.76 as permitted sender) client-ip=143.55.224.76; envelope-from=bounce+0d5485.293f67-rviswes1=asu.edu@airtableemail.com; helo=76.static.airtableemail.com;
+Authentication-Results: edge.inbound.cf-emailsecurity.net;
+	 dmarc=pass (p=reject) header.from=airtableemail.com;
+	 spf=pass smtp.mailfrom=airtableemail.com;
+	 dkim=pass header.i=@airtableemail.com header.s=krs header.b=n7FQf3W/
+Received: from edge.inbound.cf-emailsecurity.net (localhost [127.0.0.1])
+        by localhost
+        with SMTP (Cloudflare Email Security 2026.8.5) id MTIZ0927
+        for rviswes1@asu.edu;
+        Tue, 01 Sep 2026 17:58:07 +0000 (Z)
+Received: from 76.static.airtableemail.com (76.static.airtableemail.com [143.55.224.76])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	(No client certificate requested)
+	by mxa.canada.inbound.cf-emailsecurity.net (Postfix) with UTF8SMTPS id 4hZD9W1VTZzVgPF
+	for <rviswes1@asu.edu>; Tue, 01 Sep 2026 17:58:07 +0000 (UTC)
+DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=airtableemail.com; q=dns/txt; s=krs; t=1788285486; x=1788292686;
+ h=Message-Id: List-Unsubscribe-Post: List-Unsubscribe: To: To: From: From: Subject: Subject: Content-Type: Mime-Version: Date: Sender: Sender;
+ bh=Dk4B0JNd7vlji6vQFHldV5RWdhd8DQhT1GXqG0yOcLs=;
+ b=n7FQf3W/iH5jUeSrv21Fxrg6Sk5nBBteLq0b4aHrta+qR31xl+9qopC7LabDIjLkC5msIGhgYc0fR/DW2deIwlPanRSTvcx8XzFCQ7wac6lFcPo0UCOd9yJHSj1fa53Sh9JijQjocXFDfxXaM1rBb5EyFVjCcq0oGiPIsdMGfm8=
+X-Mailgun-Sid: WyI3MTFhYyIsInJ2aXN3ZXMxQGFzdS5lZHUiLCIyOTNmNjciXQ==
+Received: by 42c6d4e10859d4b74c88e4fa37ecadf6e0fa2ca49c9a310ce89815ff1aa9fdbb with HTTP
+ id 6a97122ea82b5c0227034358; Tue, 01 Sep 2026 17:58:06 GMT
+X-Mailgun-Sending-Ip: 143.55.224.76
+Sender: noreply+automations@airtableemail.com
+Date: Tue, 01 Sep 2026 17:58:06 +0000
+Mime-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="e51e06184552cea590590bb71be28f0f11eca9d2bdfd280f11705e8d784e"
+Subject: Get Ready for the ASU AIR Spark Challenge, Sept. 2-4!
+From: Airtable Automations <noreply+automations@airtableemail.com>
+To: rviswes1@asu.edu
+List-Unsubscribe: <https://airtable.com/unsubscribeFromEmail/appzNHpLL8HIkEFLA/wflj3Ectdn8yTKskF/wacr3rYIzR9ZIYybm?email=rviswes1%40asu.edu&token=187899cd0ae30a485e96542ac9504c90576f9a7f84157f5fad54391776677f97>
+List-Unsubscribe-Post: List-Unsubscribe=One-Click
+X-Mailgun-Variables: {"applicationId": "appzNHpLL8HIkEFLA", "workflowId": "wflj3Ectdn8yTKskF"}
+Message-Id: <20260901175806.2e0a3de359475b8f@airtableemail.com>
+X-Area1Security-Disposition: BULK 4hZD9f46xZzKmBV-2026-09-01T17:58:14
+X-CFEmailSecurity-Disposition: BULK 4hZD9f46xZzKmBV-2026-09-01T17:58:14
+X-Area1Security-Origin: EXTERNAL 4hZD9f46xZzKmBV-2026-09-01T17:58:14
+X-CFEmailSecurity-Origin: EXTERNAL 4hZD9f46xZzKmBV-2026-09-01T17:58:14
+X-Area1Security-Processed: 341ed3390d64f26202ae714e56b2d7ac;2;BULK;2026-09-01T17:58:14;46861993-beca-4599-8b74-7dbf0383a26f
+X-CFEmailSecurity-Processed: 341ed3390d64f26202ae714e56b2d7ac;2;BULK;2026-09-01T17:58:14;46861993-beca-4599-8b74-7dbf0383a26f
+X-CFEmailSecurity-Disposition: BULK 4hZD9W1VTZzVgPF-2026-09-01T17:58:07
+X-Area1Security-Origin: EXTERNAL 4hZD9W1VTZzVgPF-2026-09-01T17:58:07
+X-CFEmailSecurity-Origin: EXTERNAL 4hZD9W1VTZzVgPF-2026-09-01T17:58:07
+X-Area1Security-Processed: 341ed3390d64f26202ae714e56b2d7ac;1;BULK;2026-09-01T17:58:13;46861993-beca-4599-8b74-7dbf0383a26f
+X-CFEmailSecurity-Processed: 341ed3390d64f26202ae714e56b2d7ac;1;BULK;2026-09-01T17:58:13;46861993-beca-4599-8b74-7dbf0383a26f
+
+--e51e06184552cea590590bb71be28f0f11eca9d2bdfd280f11705e8d784e
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+
+# Hi Roshan!
+
+You=E2=80=99re confirmed for this week=E2=80=99s **ASU AIR Spark Challenge*=
+*, hosted by Knowledge Enterprise Research Technology Office and Enterprise=
+ Technology. In this **virtual, 2-day hackathon**, you'll work in **teams o=
+f 3-4** members to explore any use case with supercharged AI compute, then =
+get ready to take the virtual stage to pitch your creation to an expert jur=
+y for grand prizes. Read on for important details like parking, team format=
+ions, prize details and more!
+
+_**IMPORTANT: The information below is exclusive to individuals who have co=
+nfirmed their program acceptance. DO NOT SHARE WITH OTHERS.**_
+
+## Challenge resources
+**Before Spark Challenge start:** To hit the ground running at the ASU AIR =
+Spark Challenge, get prepared with the information and tools you need:
+* Learn Git at [https://swcarpentry.github.io/git-novice/](https://swcarpen=
+try.github.io/git-novice/). Git will be used to make sure you and your team=
+ can build your code collaboratively, and the judges will be using your Git=
+hub link to check out your results!
+* Get your API key and get started with AIR at [https://docs.rc.asu.edu/ai/=
+getting-started](https://docs.rc.asu.edu/ai/getting-started). Getting your =
+tool of choice, API key, and some experience ahead of time will make sure y=
+ou're ready as soon as the clock starts.
+* Watch a recording of our recent [AI Research Platform workshop](https://a=
+su.zoom.us/rec/share/c0YGNrlZWQHZB4AL6JaREYVSg6J6k9MZ0pJ39511Sh8x5dRLi8jfXq=
+5AGcOD0rzc.8Valg6wF1Alfwsbd), led by Knowledge Enterprise Research Technolo=
+gy Office
+## Spark Challenge schedule
+**Wed, Sept. 2, 5:00-7:30 p.m.=C2=A0 | Challenge launch, Zoom**
+Link: [https://asu.zoom.us/j/87410584863](https://asu.zoom.us/j/87410584863=
+)
+Challenge kickoff! Join us online to explore the challenge brief, access ch=
+allenge resources and network together before teams begin working.=C2=A0
+**Thurs, Sept. 3=C2=A0 | Hacking and mentorship, Online**
+Teams work together, checking in remotely with challenge organizers and men=
+tors from Knowledge Enterprise Research Technology Office by appointment.=
+=C2=A0
+**Thurs, Sept. 3, 11:59 p.m. | Submissions due, Online**
+Teams finalize and upload their solutions; submissions due by 11:59 p.m.=C2=
+=A0
+**Fri, Sept. 4, 10:00 a.m.-1:30 p.m. | Closing ceremony**
+[RSVP for the finale](https://asu.zoom.us/webinar/register/WN_tUH5IaKFRaW8u=
+QGPBYGuww)
+Grand finale: demos, pitches, awards! Join us on Zoom as teams pitch live, =
+demo solutions and answer jury Q&A to determine top awarded teams. Share th=
+e webinar RSVP link with colleagues, friends and family!
+## Teaming
+**If you applied solo**, we=E2=80=99ll pair you with other solo applicants =
+based on experience and skill level. You will be introduced to your team on=
+ Sept. 2, 2026. Our goal is to create balanced, high-performing groups. Tea=
+ms are strategically assembled based on:
+* Technical skill level: Balancing expertise across the group.
+* Academic diversity: Mixing backgrounds for broader perspective.
+* Experience: Accounting for prior Hackathon and tool use
+* Availability: Ensuring that overall availability is factored into the tea=
+m=E2=80=99s structure so that progress remains steady.
+**If you applied with a team**, please [confirm your team lineup and confir=
+mation status](https://airtable.com/appzNHpLL8HIkEFLA/shrK3BdKVYTouy3wp). R=
+eminder that any unconfirmed spots may be released to any Waitlisted regist=
+rants. Email [et-hackathons@asu.edu](mailto:et-hackathons@asu.edu) with any=
+ needs.
+## Prize pool
+**=F0=9F=8F=86 Grand prize $1,000** Awarded to the top team as determined b=
+y our expert jury panel using a standard rubric.
+**=E2=AD=90 Fan Favorite $500** Voted on and awarded by your fellow competi=
+ng teams for their favorite use case.
+
+Awards are sponsored by the Knowledge Enterprise Research Technology Office=
+ and issued courtesy of Enterprise Technology. Student prizes will be credi=
+ted as account scholarships; staff/faculty prizes will be issued as stipend=
+s.
+
+Please email [et-hackathons@asu.edu](mailto:et-hackathons@asu.edu) with any=
+ questions or needs prior to the hack. We look forward to seeing you at the=
+ Spark Challenge, September 2, starting at 5:00 PM!
+
+# Forks up!=20
+*Spark Challenge Organizers*
+
+--e51e06184552cea590590bb71be28f0f11eca9d2bdfd280f11705e8d784e
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.=
+w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns=3D"http://www.w3.org/1999/xhtml">
+    <head>
+        <meta name=3D"viewport" content=3D"width=3Ddevice-width" />
+        <meta httpEquiv=3D"X-UA-Compatible" content=3D"IE=3Dedge" />
+        <meta httpEquiv=3D"Content-Type" content=3D"text/html; charset=3DUT=
+F-8" />
+        <title>Get Ready for the ASU AIR Spark Challenge, Sept. 2-4!</title=
+>
+        <style type=3D"text/css">
+    html {
+        box-sizing: border-box;
+        font-size: 14px;
+        margin: 0;
+    }
+    table {
+        border-spacing: 0;
+    }
+    td {
+        vertical-align: top;
+        margin: 0;
+    }
+    img {
+        max-width: 100%;
+    }
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+        font-weight: 600;
+        line-height: 1.4;
+    }
+    a:not(.colorOverride),
+    a:visited:not(.colorOverride),
+    a[href]:not(.colorOverride),
+    a[href]:visited:not(.colorOverride) {
+        color: #3276dc !important;
+    }
+
+=2Ecss-hqgwoi{width:74px;height:14px;ma=
+rgin:0 0 0 5px;position:relative;top:2=
+px;}.css-b0qdn7{padding-bottom:4px;}.css-13rotye{-webkit-font-smoothing:ant=
+ialiased;-webkit-text-size-adjust:none;width:100%;height:100%;line-height:1=
+=2E6em;color:#333333;background-color:#=
+fafafa;font-weight:400;}@media only sc=
+reen and (max-width:640px){.css-13rotye body{padding:20px !important;}.css-=
+13rotye .container{padding:20px !important;width:100% !important;}.css-13ro=
+tye .header,.css-13rotye .content,.css-13rotye .footer{padding:20px !import=
+ant;}}.css-18xjf65{margin:0 auto;clear:both;font-size:16px;font-family:-app=
+le-system,BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantare=
+ll","Fira Sans","Droid Sans","Helvetica Neue",sans-serif;padding:20px;width=
+:720px;}.css-y9bb7n{background:#fff;font-size:16px;line-height:24px;word-wr=
+ap:break-word;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Robo=
+to","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue"=
+,sans-serif;padding:40px;border-radius:6px;}.css-40d1fs{font-size:12px;colo=
+r:#888;margin:0;vertical-align:baseline;padding:20px 40px;}</style>
+    </head>
+    <body itemscope itemtype=3D"http://schema.org/EmailMessage" class=3D"cs=
+s-13rotye" style=3D"-webkit-font-smoothing: antialiased; -webkit-text-size-=
+adjust: none; width: 100%; height: 100%; line-height: 1.6em; color: #333333=
+; background-color: #fafafa; font-weight: 400;"><div><!--[if mso]>
+    <style type=3D"text/css">
+    body, table, td {font-family: -apple-system, BlinkMacSystemFont, "Segoe=
+ UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",=
+ "Helvetica Neue", sans-serif !important;}
+    </style>
+    <![endif]--></div><table class=3D"container css-18xjf65" style=3D"borde=
+r-spacing: 0; margin: 0 auto; clear: both; font-size: 16px; font-family: -a=
+pple-system,BlinkMacSystemFont,'Segoe UI','Roboto','Oxygen','Ubuntu','Canta=
+rell','Fira Sans','Droid Sans','Helvetica Neue',sans-serif; padding: 20px; =
+width: 720px;"><tr><td colspan=3D"2" class=3D"content  css-y9bb7n" style=3D=
+"vertical-align: top; margin: 0; background: #fff; font-size: 16px; line-he=
+ight: 24px; word-wrap: break-word; font-family: -apple-system,BlinkMacSyste=
+mFont,'Segoe UI','Roboto','Oxygen','Ubuntu','Cantarell','Fira Sans','Droid =
+Sans','Helvetica Neue',sans-serif; padding: 40px; border-radius: 6px;"><h1 =
+style=3D"font-weight: 600; line-height: 1.4;"><span>Hi Roshan!</span></h1><=
+p></p><p><span>You=E2=80=99re confirmed for this week=E2=80=99s </span><str=
+ong><span>ASU AIR Spark Challenge</span></strong><span>, hosted by Knowledg=
+e Enterprise Research Technology Office and Enterprise Technology. In this =
+</span><strong><span>virtual, 2-day hackathon</span></strong><span>, you'll=
+ work in </span><strong><span>teams of 3-4</span></strong><span> members to=
+ explore any use case with supercharged AI compute, then get ready to take =
+the virtual stage to pitch your creation to an expert jury for grand prizes=
+=2E Read on for important details like=20=
+parking, team formations, prize detail=
+s and more!</span></p><p></p><p><em><strong><span>IMPORTANT: The informatio=
+n below is exclusive to individuals who have confirmed their program accept=
+ance. DO NOT SHARE WITH OTHERS.</span></strong></em></p><p></p><h2 style=3D=
+"font-weight: 600; line-height: 1.4;"><span>Challenge resources</span></h2>=
+<p><strong><span>Before Spark Challenge start:</span></strong><span> To hit=
+ the ground running at the ASU AIR Spark Challenge, get prepared with the i=
+nformation and tools you need:</span></p><ul style=3D"padding-inline-start:=
+1em"><li><span>Learn Git at </span><a href=3D"https://swcarpentry.github.io=
+/git-novice/" style=3D"color: #3276dc;"><span>https://swcarpentry.github.io=
+/git-novice/</span></a><span>. Git will be used to make sure you and your t=
+eam can build your code collaboratively, and the judges will be using your =
+Github link to check out your results!</span></li><li><span>Get your API ke=
+y and get started with AIR at </span><a href=3D"https://docs.rc.asu.edu/ai/=
+getting-started" style=3D"color: #3276dc;"><span>https://docs.rc.asu.edu/ai=
+/getting-started</span></a><span>. Getting your tool of choice, API key, an=
+d some experience ahead of time will make sure you're ready as soon as the =
+clock starts.</span></li><li><span>Watch a recording of our recent </span><=
+a href=3D"https://asu.zoom.us/rec/share/c0YGNrlZWQHZB4AL6JaREYVSg6J6k9MZ0pJ=
+39511Sh8x5dRLi8jfXq5AGcOD0rzc.8Valg6wF1Alfwsbd" style=3D"color: #3276dc;"><=
+span>AI Research Platform workshop</span></a><span>, led by Knowledge Enter=
+prise Research Technology Office</span></li></ul><h2 style=3D"font-weight: =
+600; line-height: 1.4;"><span>Spark Challenge schedule</span></h2><p><stron=
+g><span>Wed, Sept. 2, 5:00-7:30 p.m.=C2=A0 | Challenge launch, Zoom</span><=
+/strong></p><p><span>Link: </span><a href=3D"https://asu.zoom.us/j/87410584=
+863" style=3D"color: #3276dc;"><span>https://asu.zoom.us/j/87410584863</spa=
+n></a></p><p><span>Challenge kickoff! Join us online to explore the challen=
+ge brief, access challenge resources and network together before teams begi=
+n working.=C2=A0</span></p><p><strong><span>Thurs, Sept. 3=C2=A0 | Hacking =
+and mentorship, Online</span></strong></p><p><span>Teams work together, che=
+cking in remotely with challenge organizers and mentors from Knowledge Ente=
+rprise Research Technology Office by appointment.=C2=A0</span></p><p><stron=
+g><span>Thurs, Sept. 3, 11:59 p.m. | Submissions due, Online</span></strong=
+></p><p><span>Teams finalize and upload their solutions; submissions due by=
+ 11:59 p.m.=C2=A0</span></p><p><strong><span>Fri, Sept. 4, 10:00 a.m.-1:30 =
+p.m. | Closing ceremony</span></strong></p><p><a href=3D"https://asu.zoom.u=
+s/webinar/register/WN_tUH5IaKFRaW8uQGPBYGuww" style=3D"color: #3276dc;"><sp=
+an>RSVP for the finale</span></a></p><p><span>Grand finale: demos, pitches,=
+ awards! Join us on Zoom as teams pitch live, demo solutions and answer jur=
+y Q&amp;A to determine top awarded teams. Share the webinar RSVP link with =
+colleagues, friends and family!</span></p><h2 style=3D"font-weight: 600; li=
+ne-height: 1.4;"><span>Teaming</span></h2><p><strong><span>If you applied s=
+olo</span></strong><span>, we=E2=80=99ll pair you with other solo applicant=
+s based on experience and skill level. You will be introduced to your team =
+on Sept. 2, 2026. Our goal is to create balanced, high-performing groups. T=
+eams are strategically assembled based on:</span></p><ul style=3D"padding-i=
+nline-start:1em"><li><span>Technical skill level: Balancing expertise acros=
+s the group.</span></li><li><span>Academic diversity: Mixing backgrounds fo=
+r broader perspective.</span></li><li><span>Experience: Accounting for prio=
+r Hackathon and tool use</span></li><li><span>Availability: Ensuring that o=
+verall availability is factored into the team=E2=80=99s structure so that p=
+rogress remains steady.</span></li></ul><p><strong><span>If you applied wit=
+h a team</span></strong><span>, please </span><a href=3D"https://airtable.c=
+om/appzNHpLL8HIkEFLA/shrK3BdKVYTouy3wp" style=3D"color: #3276dc;"><span>con=
+firm your team lineup and confirmation status</span></a><span>. Reminder th=
+at any unconfirmed spots may be released to any Waitlisted registrants. Ema=
+il </span><a href=3D"mailto:et-hackathons@asu.edu" style=3D"color: #3276dc;=
+"><span>et-hackathons@asu.edu</span></a><span> with any needs.</span></p><h=
+2 style=3D"font-weight: 600; line-height: 1.4;"><span>Prize pool</span></h2=
+><p><strong><span>=F0=9F=8F=86 Grand prize $1,000</span></strong><span> Awa=
+rded to the top team as determined by our expert jury panel using a standar=
+d rubric.</span></p><p><strong><span>=E2=AD=90 Fan Favorite $500</span></st=
+rong><span> Voted on and awarded by your fellow competing teams for their f=
+avorite use case.</span></p><p></p><p><span>Awards are sponsored by the Kno=
+wledge Enterprise Research Technology Office and issued courtesy of Enterpr=
+ise Technology. Student prizes will be credited as account scholarships; st=
+aff/faculty prizes will be issued as stipends.</span></p><p></p><p><span>Pl=
+ease email </span><a href=3D"mailto:et-hackathons@asu.edu" style=3D"color: =
+#3276dc;"><span>et-hackathons@asu.edu</span></a><span> with any questions o=
+r needs prior to the hack. We look forward to seeing you at the Spark Chall=
+enge, September 2, starting at 5:00 PM!</span></p><p></p><h1 style=3D"font-=
+weight: 600; line-height: 1.4;"><span>Forks up! </span></h1><p><em><span>Sp=
+ark Challenge Organizers</span></em></p></td></tr><tr><td colspan=3D"2" cla=
+ss=3D"footer css-40d1fs" style=3D"font-size: 12px; color: #888; margin: 0; =
+vertical-align: baseline; padding: 20px 40px;"><table style=3D"border-spaci=
+ng: 0;"><tr><td style=3D"vertical-align: top; margin: 0;">Sent via Automati=
+ons on </td><td style=3D"vertical-align: top; margin: 0;"><a href=3D"https:=
+//airtable.com?utm_medium=3Demail&amp;utm_source=3Dproduct_team&amp;utm_con=
+tent=3Dtransactional-alerts" style=3D"color: #3276dc;"><picture><source src=
+set=3D"https://static.airtable.com/images/airtable_lockup_2026_dark@164h.pn=
+g" media=3D"(prefers-color-scheme: dark)"><img src=3D"https://static.airtab=
+le.com/images/airtable_lockup_2026@164h.png" width=3D"74" height=3D"14" alt=
+=3D"Airtable" class=3D"css-hqgwoi" style=3D"max-width: 100%; width: 74px; h=
+eight: 14px; margin: 0 0 0 5px; position: relative; top: 2px;"></picture></=
+a></td></tr><tr><td colspan=3D"2" class=3D"css-b0qdn7" style=3D"vertical-al=
+ign: top; margin: 0; padding-bottom: 4px;"><a href=3D"https://airtable.com/=
+unsubscribeFromEmail/appzNHpLL8HIkEFLA/wflj3Ectdn8yTKskF/wacr3rYIzR9ZIYybm?=
+email=3Drviswes1%40asu.edu&token=3D187899cd0ae30a485e96542ac9504c90576f9a7f=
+84157f5fad54391776677f97" style=3D"color: #3276dc;">Unsubscribe</a></td></t=
+r><tr><td colspan=3D"2" style=3D"vertical-align: top; margin: 0;"><div>=C2=
+=A92026 Airtable</div></td></tr></table></td></tr></table></body>
+</html>
+
+--e51e06184552cea590590bb71be28f0f11eca9d2bdfd280f11705e8d784e--

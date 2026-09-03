@@ -1,0 +1,163 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-03T00:00:00.000Z",
+  "title": "Design System: Vizor for Advisors",
+  "extensions": {
+    "colorMeta": {
+      "maroon": {
+        "role": "primary",
+        "displayName": "Ledger Maroon",
+        "canonical": "#8c1d40",
+        "tonalRamp": ["#2e0a17", "#4a1122", "#5c1129", "#7a1734", "#8c1d40", "#a83a5c", "#c96f8a", "#e9bfcd"]
+      },
+      "gold": {
+        "role": "primary",
+        "displayName": "Ledger Gold",
+        "canonical": "#ffc627",
+        "tonalRamp": ["#4a3600", "#7a5b00", "#a37a00", "#cc9c00", "#ffc627", "#ffd35c", "#ffe191", "#fff3c6"]
+      },
+      "ink": {
+        "role": "primary",
+        "displayName": "Near-Black Ink",
+        "canonical": "#17140d",
+        "tonalRamp": ["#0c0a06", "#17140d", "#4a4536", "#655f4c", "#837c65", "#a49c81", "#c6bfa9", "#e3ddcf"]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Warm Paper",
+        "canonical": "#f6f2e9",
+        "tonalRamp": ["#4a4536", "#837c65", "#b9ac83", "#ddd4bd", "#e9e1d0", "#f6f2e9", "#fbf9f3", "#fefdfb"]
+      },
+      "paper-raised": {
+        "role": "neutral",
+        "displayName": "Raised Paper",
+        "canonical": "#fbf9f3",
+        "tonalRamp": ["#4a4536", "#837c65", "#b9ac83", "#ddd4bd", "#e9e1d0", "#f6f2e9", "#fbf9f3", "#fefdfb"]
+      },
+      "rule": {
+        "role": "neutral",
+        "displayName": "Rule Line",
+        "canonical": "#ddd4bd",
+        "tonalRamp": ["#4a4536", "#655f4c", "#837c65", "#a49c81", "#b9ac83", "#ddd4bd", "#e9e1d0", "#f2ede1"]
+      },
+      "rule-strong": {
+        "role": "neutral",
+        "displayName": "Rule Line, Strong",
+        "canonical": "#b9ac83",
+        "tonalRamp": ["#3d3826", "#5c5439", "#7a6f4d", "#988a61", "#b9ac83", "#cbc0a0", "#ddd4bd", "#eee8db"]
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Landing hero headline only (one instance)." },
+      "display-accent": { "displayName": "Display Accent", "purpose": "The italic serif closing phrase of the landing hero." },
+      "headline": { "displayName": "Headline", "purpose": "Page greetings and identity lines (dashboard greeting, ticket detail student name)." },
+      "title": { "displayName": "Title", "purpose": "Login prompt." },
+      "body-marketing": { "displayName": "Marketing Body", "purpose": "Landing page prose only." },
+      "body": { "displayName": "Body", "purpose": "Default dashboard content register: tickets, DARS trees, correspondence, tables." },
+      "label": { "displayName": "Label", "purpose": "Section headers, form field labels, category tags. The system's only uppercase/small-caps register." }
+    },
+    "shadows": [],
+    "motion": [
+      { "name": "resolve-hold-fill", "value": "transform 850ms cubic-bezier(.4,0,.2,1)", "purpose": "Left-to-right fill on the press-and-hold Resolve button; the physical analog of a committed signature." },
+      { "name": "ease-standard", "value": "150ms ease-out / color/background transitions default", "purpose": "Default hover/focus color transitions across links, nav items, and cards." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "xl", "value": "1280px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "State Dot",
+      "kind": "custom",
+      "refersTo": "state-dot",
+      "description": "The single source of status truth: a filled circle in maroon/gold/ink, reused verbatim across tickets, DARS requirements, caseload, and legends.",
+      "html": "<span class=\"ds-state-dot\" aria-hidden=\"true\"></span>",
+      "css": ".ds-state-dot { display: inline-block; width: 10px; height: 10px; border-radius: 9999px; background-color: #8c1d40; flex-shrink: 0; }"
+    },
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Solid ink call-to-action button, e.g. \"Sign in as an advisor\".",
+      "html": "<button class=\"ds-btn-primary\">Sign in as an advisor</button>",
+      "css": ".ds-btn-primary { background: #17140d; color: #fbf9f3; padding: 12px 20px; border-radius: 6px; border: none; font-family: 'Archivo', ui-sans-serif, sans-serif; font-size: 14px; font-weight: 500; transition: background 0.2s; } .ds-btn-primary:hover { background: rgba(23,20,13,0.9); } .ds-btn-primary:focus-visible { outline: 2px solid #8c1d40; outline-offset: 2px; }"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Transparent ink-bordered button that inverts to solid ink on hover, e.g. landing nav \"Sign in\".",
+      "html": "<button class=\"ds-btn-outline\">Sign in</button>",
+      "css": ".ds-btn-outline { background: transparent; color: #17140d; border: 1px solid #17140d; padding: 8px 16px; border-radius: 6px; font-family: 'Archivo', ui-sans-serif, sans-serif; font-size: 14px; font-weight: 500; transition: background 0.2s, color 0.2s; } .ds-btn-outline:hover { background: #17140d; color: #fbf9f3; } .ds-btn-outline:focus-visible { outline: 2px solid #8c1d40; outline-offset: 2px; }"
+    },
+    {
+      "name": "Resolve Button (signature)",
+      "kind": "custom",
+      "refersTo": "resolve-ticket-button",
+      "description": "Press-and-hold commit button: an 850ms fill gesture stands in for a signature before a ticket is recorded as hard-resolved.",
+      "html": "<button class=\"ds-resolve-btn\"><span class=\"ds-resolve-fill\"></span><span class=\"ds-resolve-label\">Hold to hard-resolve</span></button>",
+      "css": ".ds-resolve-btn { position: relative; overflow: hidden; border-radius: 6px; border: 1px solid #17140d; padding: 10px 16px; font-family: 'Archivo', ui-sans-serif, sans-serif; font-size: 14px; font-weight: 500; color: #17140d; user-select: none; background: transparent; } .ds-resolve-fill { position: absolute; inset: 0; background: #17140d; transform-origin: left; transform: scaleX(0); transition: transform 850ms cubic-bezier(.4,0,.2,1); } .ds-resolve-btn:active .ds-resolve-fill { transform: scaleX(1); } .ds-resolve-label { position: relative; mix-blend-mode: difference; color: #fff; }"
+    },
+    {
+      "name": "Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Caseload / summary card: raised paper on ruled ground, hover border strengthens.",
+      "html": "<a class=\"ds-card\" href=\"#\"><p class=\"ds-card-title\">Jordan Alvarez</p><p class=\"ds-card-sub\">Senior · BS Computer Science</p></a>",
+      "css": ".ds-card { display: block; background: #fbf9f3; border: 1px solid #ddd4bd; border-radius: 8px; padding: 14px 16px; text-decoration: none; color: #17140d; transition: border-color 0.2s; } .ds-card:hover { border-color: #b9ac83; } .ds-card-title { font-family: 'Archivo', ui-sans-serif, sans-serif; font-size: 14px; font-weight: 500; } .ds-card-sub { font-family: 'Archivo', ui-sans-serif, sans-serif; font-size: 12px; color: #837c65; margin-top: 2px; }"
+    },
+    {
+      "name": "Input Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Login form field: raised paper, rule border, maroon focus border.",
+      "html": "<input class=\"ds-input\" type=\"email\" placeholder=\"schen@asu.edu\" />",
+      "css": ".ds-input { width: 100%; background: #fbf9f3; border: 1px solid #ddd4bd; border-radius: 6px; padding: 10px 12px; font-family: 'Archivo', ui-sans-serif, sans-serif; font-size: 14px; color: #17140d; outline: none; transition: border-color 0.2s; } .ds-input:focus { border-color: #8c1d40; }"
+    },
+    {
+      "name": "Nav Item",
+      "kind": "nav",
+      "refersTo": "nav-item-active",
+      "description": "Left icon-rail navigation item; active state is a solid ink pill.",
+      "html": "<a class=\"ds-nav-item ds-nav-item-active\" href=\"#\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"3.5\" y=\"3.5\" width=\"7\" height=\"7\" rx=\"0.5\"/><rect x=\"13.5\" y=\"3.5\" width=\"7\" height=\"7\" rx=\"0.5\"/><rect x=\"3.5\" y=\"13.5\" width=\"7\" height=\"7\" rx=\"0.5\"/><rect x=\"13.5\" y=\"13.5\" width=\"7\" height=\"7\" rx=\"0.5\"/></svg><span>Overview</span></a>",
+      "css": ".ds-nav-item { display: flex; align-items: center; gap: 12px; border-radius: 6px; padding: 10px 12px; font-family: 'Archivo', ui-sans-serif, sans-serif; font-size: 14px; text-decoration: none; color: #4a4536; transition: background-color 0.2s, color 0.2s; } .ds-nav-item:hover { background: rgba(221,212,189,0.4); color: #17140d; } .ds-nav-item-active { background: #17140d; color: #fbf9f3; font-weight: 500; }"
+    },
+    {
+      "name": "State Key Legend",
+      "kind": "custom",
+      "refersTo": "right-rail-legend",
+      "description": "Persistent right-rail legend explaining the three-state grammar; part of the permanent shell, not page content.",
+      "html": "<ul class=\"ds-legend\"><li><span class=\"ds-state-dot\" style=\"background:#8c1d40\"></span><div><p class=\"ds-legend-label\">Needs you</p><p class=\"ds-legend-body\">Vizor couldn't resolve it alone.</p></div></li></ul>",
+      "css": ".ds-legend { list-style: none; display: flex; flex-direction: column; gap: 12px; } .ds-legend li { display: flex; align-items: flex-start; gap: 10px; } .ds-legend-label { font-family: 'Archivo', ui-sans-serif, sans-serif; font-size: 14px; font-weight: 500; color: #17140d; } .ds-legend-body { font-family: 'Archivo', ui-sans-serif, sans-serif; font-size: 12px; color: #837c65; margin-top: 2px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Advising Ledger",
+    "overview": "Vizor for Advisors reads as a page from a physical ledger, not a SaaS dashboard: warm paper ground, a visible 32px ruled baseline grid running under every screen, and status recorded the way a ledger records a transaction — as one of exactly three committed states, never a decorative badge. The world is a Bauhaus foundation-workshop discipline (primaries as load-bearing law, never ornament) fused onto ASU's own maroon-and-gold identity and real academic-records content: DARS requirement trees, ticket queues, session transcripts.\n\nThe system is flat by construction. There is no shadow vocabulary anywhere in the build — depth comes from tonal contrast between the ruled paper ground and opaque raised surfaces, and from 1px rule borders, never from elevation. A geometric sans (Archivo) carries navigation, numerals, labels, and the landing display headline; a companion serif (Source Serif 4) is reserved for headline-scale moments — page greetings, ticket subject names, the login prompt, and one italicized accent phrase on the landing hero — rather than for body copy generally. Dashboard body text (ticket correspondence, DARS line items, summaries) renders in the sans at a small, dense size suited to fast triage, not leisurely reading.\n\nThe three state colors — maroon, gold, ink — are rationed and never used decoratively outside status law. The same three colors and the same filled-dot mark answer the same question everywhere they appear: does this need the advisor, did the student resolve it, or did the advisor commit a resolution.",
+    "keyCharacteristics": [
+      "Warm paper ground with a visible, structural 32px ruled baseline grid (repeating-linear-gradient, --color-rule), painted over by opaque surfaces where they need a clean field.",
+      "Exactly three load-bearing state colors — maroon (needs the advisor), gold (student self-resolved), ink (advisor hard-resolved) — reused verbatim across tickets, DARS requirement status, and the landing legend.",
+      "Flat throughout: zero box-shadow in the shipped codebase. Depth is tonal (paper vs. paper-raised) and linear (1px rule borders), never a drop shadow.",
+      "Archivo (sans) for structure — nav, numerals, labels, the landing display headline; Source Serif 4 reserved for headline-scale prose moments, not body copy.",
+      "A permanent three-pane desktop shell: icon rail, content, and a persistent right rail carrying the state-key legend and the live caseload — not page-specific content, part of the system."
+    ],
+    "rules": [
+      { "name": "The Rationed Three Rule", "body": "Maroon, gold, and ink are the only colors ever assigned meaning by status. They appear in exactly one place across the whole system — StateDot's DOT_CLASS map — and every surface that shows status (ticket rows, DARS requirement trees, the caseload strip, the right-rail legend, the landing legend bands) reads from that same map. No status is ever shown as a muted gray pill or a fourth color.", "section": "colors" },
+      { "name": "The Never-Decorative Rule", "body": "Outside status law, maroon and gold do not appear as accent color. Buttons, links, and chrome use ink and the neutral scale only; the two state colors are reserved entirely for the moment they mean something.", "section": "colors" },
+      { "name": "The Headline-Only Serif Rule", "body": "Source Serif 4 is spent only at headline/title scale (page greetings, a ticket's student name, the login prompt, one landing accent phrase). Reading-dense dashboard content — ticket bodies, DARS trees, correspondence — stays in the sans at body size. Where the direction contract framed the serif as a reading-content face, the shipped build reserves it for headline moments instead; that's the standing rule going forward.", "section": "typography" },
+      { "name": "The Flat Ledger Rule", "body": "No surface ever casts a shadow. A surface reads as 'raised' only by switching from paper to paper-raised and gaining a rule border — never by gaining a shadow.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do assign maroon, gold, and ink only through StateDot's shared color map — any new status surface should read from that map, not invent a new color or a gray pill.",
+      "Do keep the ruled baseline grid as the page's ground plane; new full-bleed sections should paint over it with paper-raised or a state color rather than hiding it with a container shadow.",
+      "Do reserve Source Serif 4 for headline-scale moments (greetings, names, the login prompt); keep dense dashboard content — tables, correspondence, DARS trees — in Archivo at body size.",
+      "Do use the authored 1.75-stroke icon set for structural/navigational marks; do not mix in an icon library or use icons to signal status."
+    ],
+    "donts": [
+      "Don't introduce box-shadow anywhere; the system is flat by construction, with zero instances in the shipped build.",
+      "Don't use maroon or gold decoratively (accent color, hover tint, illustration) outside their status meaning — the one confirmed exception is the maroon focus ring/border, itself a 'needs attention' signal.",
+      "Don't add a fourth state color or a muted/neutral status pill; the grammar is rationed to exactly three, by design."
+    ]
+  }
+}
