@@ -221,3 +221,6 @@ __marimo__/
 
 #claude
 .claude
+
+# Vizor KB ingestion cache (raw scraped responses, re-fetchable)
+backend/cache/

@@ -1,0 +1,38 @@
+# KB ingestion seed list (docs/PROJECT_PLAN.md §6.2).
+#
+# Three source kinds:
+#   - static:  fetched with httpx, main content pulled with trafilatura
+#   - api:     hit directly (JSON), used for the club directory (CampusLabs/Engage)
+#   - handwritten: not fetched — read from fixtures/kb/procedural/*.md as-is
+#
+# Keep this list curated. Scraping less than feels natural is the point —
+# a broad crawl poisons retrieval more than a small gap in coverage does.
+
+handwritten:
+  dir: fixtures/kb/procedural
+  doc_type: procedural
+
+static:
+  # Career / opportunity programs — stable, factual, worth a real crawl.
+  - url: https://acceleratedmasters.asu.edu/
+    title: "4+1 Accelerated Master's Programs"
+    doc_type: directory
+    majors: []
+  - url: https://career.eoss.asu.edu/internship-resources/
+    title: "Internships at ASU"
+    doc_type: directory
+    majors: []
+  - url: https://ours.thecollege.asu.edu/
+    title: "Undergraduate Research Opportunities"
+    doc_type: directory
+    majors: []
+
+api:
+  # Sun Devil Sync / CampusLabs Engage club directory — JSON API behind the
+  # React app. Endpoint discovered via devtools -> Network -> XHR.
+  # Left as a placeholder: confirm the live endpoint before running ingest
+  # with `--source api`, it tends to move.
+  - url: https://asu.campuslabs.com/engage/api/discovery/search/organizations
+    title: "Sun Devil Sync Club Directory"
+    doc_type: directory
+    majors: []

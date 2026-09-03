@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "Vizor",
+  "version": "0.1.0",
+  "description": "AI advising assistant for ASU students.",
+  "permissions": ["storage"],
+  "host_permissions": ["http://localhost:8000/*"],
+  "content_scripts": [
+    {
+      "matches": ["*://*.asu.edu/*"],
+      "js": ["config.js", "styles.js", "content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

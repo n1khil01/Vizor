@@ -1,0 +1,1655 @@
+{
+  "report": {
+    "program": "BS COMPUTER SCIENCE",
+    "program_code": "ES CSE BS",
+    "college": "IRA A. FULTON SCHOOLS OF ENGINEERING",
+    "catalog_year": "Fall 2023",
+    "expected_grad_term": "SP27",
+    "prepared_on": "2026-09-03T09:14:00",
+    "overall_status": "AT LEAST ONE REQUIREMENT HAS NOT BEEN SATISFIED",
+    "status_code": "unmet",
+    "credits_earned": 96.0,
+    "credits_required": 120.0,
+    "credits_needed": 129.0,
+    "credits_in_progress": 15.0,
+    "asu_gpa": 2.59,
+    "major_gpa": 2.31
+  },
+  "requirements": [
+    {
+      "seq": 1,
+      "parent_seq": null,
+      "section_type": "informational",
+      "is_optional": true,
+      "code": "OPT-IP",
+      "title": "IN PROGRESS COURSES",
+      "description": "These courses are currently in progress",
+      "status": "informational",
+      "credits_required": null,
+      "credits_earned": null,
+      "credits_in_progress": 15.0,
+      "groups_required": null,
+      "notes": [],
+      "courses": [
+        {
+          "term": "FA26",
+          "term_sort": 202630,
+          "campus_flag": "M",
+          "course_code": "CSE 330",
+          "course_title": "OPERATING SYSTEMS",
+          "credits": 3.0,
+          "grade": "NR",
+          "grade_type": "in_progress",
+          "transfer_source": null,
+          "is_in_progress": true
+        },
+        {
+          "term": "FA26",
+          "term_sort": 202630,
+          "campus_flag": "M",
+          "course_code": "CSE 340",
+          "course_title": "PRINCIPLES OF PROGRAMMING LAN",
+          "credits": 3.0,
+          "grade": "NR",
+          "grade_type": "in_progress",
+          "transfer_source": null,
+          "is_in_progress": true
+        },
+        {
+          "term": "FA26",
+          "term_sort": 202630,
+          "campus_flag": "M",
+          "course_code": "CSE 360",
+          "course_title": "INTRO TO SOFTWARE ENGINEERING",
+          "credits": 3.0,
+          "grade": "NR",
+          "grade_type": "in_progress",
+          "transfer_source": null,
+          "is_in_progress": true
+        },
+        {
+          "term": "FA26",
+          "term_sort": 202630,
+          "campus_flag": "M",
+          "course_code": "CSE 412",
+          "course_title": "DATABASE MANAGEMENT",
+          "credits": 3.0,
+          "grade": "NR",
+          "grade_type": "in_progress",
+          "transfer_source": null,
+          "is_in_progress": true
+        },
+        {
+          "term": "FA26",
+          "term_sort": 202630,
+          "campus_flag": "M",
+          "course_code": "CSE 445",
+          "course_title": "DISTRIBUTED SOFTWARE DEVELOPM",
+          "credits": 3.0,
+          "grade": "NR",
+          "grade_type": "in_progress",
+          "transfer_source": null,
+          "is_in_progress": true
+        }
+      ]
+    },
+    {
+      "seq": 2,
+      "parent_seq": null,
+      "section_type": "informational",
+      "is_optional": true,
+      "code": "OPT-EXAM-MIL",
+      "title": "Credit By Exam and Military Credit 60-Hour Maximum",
+      "description": "Credit By Exam and Military Credit hours: 60 hours Maximum.",
+      "status": "informational",
+      "credits_required": 60.0,
+      "credits_earned": 7.0,
+      "credits_in_progress": 0.0,
+      "groups_required": null,
+      "notes": [],
+      "courses": []
+    },
+    {
+      "seq": 3,
+      "parent_seq": null,
+      "section_type": "informational",
+      "is_optional": true,
+      "code": "OPT-2YR",
+      "title": "Two-Year Institution 64 Hour Maximum",
+      "description": "Two-year institution hours: 64 hours Maximum.",
+      "status": "informational",
+      "credits_required": 64.0,
+      "credits_earned": 19.0,
+      "credits_in_progress": 0.0,
+      "groups_required": null,
+      "notes": [],
+      "courses": []
+    },
+    {
+      "seq": 4,
+      "parent_seq": null,
+      "section_type": "university",
+      "is_optional": false,
+      "code": "TOTAL-HOURS",
+      "title": "TOTAL HOURS: 120 hours minimum",
+      "description": "No more than 64 hours from two-year institutions may be applied toward minimum total hours.",
+      "status": "in_progress",
+      "credits_required": 120.0,
+      "credits_earned": 96.0,
+      "credits_in_progress": null,
+      "groups_required": null,
+      "notes": [
+        "Printed audit marks this line NO IP (not satisfied, in-progress work outstanding)",
+        "NEEDS> 18.00 HOURS"
+      ],
+      "courses": []
+    },
+    {
+      "seq": 5,
+      "parent_seq": null,
+      "section_type": "university",
+      "is_optional": false,
+      "code": "UPPER-DIV",
+      "title": "UPPER DIVISION: 45 Hours Minimum",
+      "description": "Upper Division - 45 hours",
+      "status": "in_progress",
+      "credits_required": 45.0,
+      "credits_earned": 22.0,
+      "credits_in_progress": null,
+      "groups_required": null,
+      "notes": [
+        "Printed audit marks this line NO IP (not satisfied, in-progress work outstanding)",
+        "NEEDS> 8.00 HOURS"
+      ],
+      "courses": []
+    },
+    {
+      "seq": 6,
+      "parent_seq": null,
+      "section_type": "university",
+      "is_optional": false,
+      "code": "RESIDENT-CREDIT",
+      "title": "RESIDENT CREDIT: 30 hours at ASU",
+      "description": "Resident ASU hours: 30 hours",
+      "status": "in_progress",
+      "credits_required": 30.0,
+      "credits_earned": 70.0,
+      "credits_in_progress": null,
+      "groups_required": null,
+      "notes": [],
+      "courses": []
+    },
+    {
+      "seq": 7,
+      "parent_seq": null,
+      "section_type": "gpa",
+      "is_optional": false,
+      "code": "ASU-GPA",
+      "title": "ASU GPA - courses taken at ASU",
+      "description": "2.00 minimum required",
+      "status": "satisfied",
+      "credits_required": 2.0,
+      "credits_earned": 70.0,
+      "credits_in_progress": 0.0,
+      "groups_required": null,
+      "notes": [
+        "EARNED: 70.00 HOURS, 2.59 GPA"
+      ],
+      "courses": []
+    },
+    {
+      "seq": 8,
+      "parent_seq": null,
+      "section_type": "informational",
+      "is_optional": false,
+      "code": "HONORS",
+      "title": "Graduation With Academic Recognition",
+      "description": "Latin honors GPA thresholds",
+      "status": "informational",
+      "credits_required": null,
+      "credits_earned": null,
+      "credits_in_progress": 0.0,
+      "groups_required": null,
+      "notes": [
+        "3.40 - 3.59 Cum Laude",
+        "3.60 - 3.79 Magna Cum Laude",
+        "3.80 - 4.00 Summa Cum Laude",
+        "Not applicable at current 2.59 ASU GPA"
+      ],
+      "courses": []
+    },
+    {
+      "seq": 9,
+      "parent_seq": null,
+      "section_type": "university",
+      "is_optional": false,
+      "code": "ASU101",
+      "title": "The ASU Experience",
+      "description": "ASU 101 or college-specific equivalent First-Year Seminar is required for all first-year students. ASU 101 - The ASU Experience: 1 hour",
+      "status": "satisfied",
+      "credits_required": 1.0,
+      "credits_earned": 1.0,
+      "credits_in_progress": 0.0,
+      "groups_required": null,
+      "notes": [],
+      "courses": [
+        {
+          "term": "FA23",
+          "term_sort": 202330,
+          "campus_flag": "M",
+          "course_code": "ASU 101-CAI",
+          "course_title": "THE ASU EXPERIENCE",
+          "credits": 1.0,
+          "grade": "A",
+          "grade_type": "graded",
+          "transfer_source": null,
+          "is_in_progress": false
+        }
+      ]
+    },
+    {
+      "seq": 10,
+      "parent_seq": null,
+      "section_type": "university",
+      "is_optional": false,
+      "code": "FIRST-YEAR-COMP",
+      "title": "FIRST-YEAR COMPOSITION",
+      "description": "Students must complete ENG 101 and ENG 102; or ENG 107 and ENG 108; or ENG 105. ENG 101 and 102 or ENG 107 and 108",
+      "status": "satisfied",
+      "credits_required": 6.0,
+      "credits_earned": 6.0,
+      "credits_in_progress": 0.0,
+      "groups_required": null,
+      "notes": [],
+      "courses": []
+    },
+    {
+      "seq": 11,
+      "parent_seq": 10,
+      "section_type": "university",
+      "is_optional": false,
+      "code": "ENG101-107",
+      "title": "ENG 101 OR ENG 107",
+      "description": "3 hours, C minimum",
+      "status": "satisfied",
+      "credits_required": 3.0,
+      "credits_earned": 3.0,
+      "credits_in_progress": 0.0,
+      "groups_required": null,
+      "notes": [],
+      "courses": [
+        {
+          "term": "FA23",
+          "term_sort": 202330,
+          "campus_flag": "M",
+          "course_code": "ENG 101",
+          "course_title": "FIRST-YEAR COMPOSITION",
+          "credits": 3.0,
+          "grade": "B",
+          "grade_type": "graded",
+          "transfer_source": null,
+          "is_in_progress": false
+        }
+      ]
+    },
+    {
+      "seq": 12,
+      "parent_seq": 10,
+      "section_type": "university",
+      "is_optional": false,
+      "code": "ENG102-108",
+      "title": "ENG 102 OR ENG 108",
+      "description": "3 hours, C minimum",
+      "status": "satisfied",
+      "credits_required": 3.0,
+      "credits_earned": 3.0,
+      "credits_in_progress": 0.0,
+      "groups_required": null,
+      "notes": [],
+      "courses": [
+        {
+          "term": "SP24",
+          "term_sort": 202410,
+          "campus_flag": "M",
+          "course_code": "ENG 102",
+          "course_title": "FIRST-YEAR COMPOSITION",
+          "credits": 3.0,
+          "grade": "B+",
+          "grade_type": "graded",
+          "transfer_source": null,
+          "is_in_progress": false
+        }
+      ]
+    },
+    {
+      "seq": 13,
+      "parent_seq": null,
+      "section_type": "general_studies",
+      "is_optional": false,
+      "code": "GS-L-UPPER",
+      "title": "LITERACY AND CRITICAL INQUIRY (UPPER)",
+      "description": "Upper Division Literacy and Critical Inquiry (L): 3 hours",
+      "status": "not_satisfied",
+      "credits_required": 3.0,
+      "credits_earned": 0.0,
+      "credits_in_progress": 0.0,
+      "groups_required": null,
+      "notes": [
+        "0 SETS TAKEN",
+        "NEEDS: CSE 485",
+        "PREREQ: CSE 360 (IN PROGRESS FA26)"
+      ],
+      "courses": []
+    },
+    {
+      "seq": 14,
+      "parent_seq": null,
+      "section_type": "general_studies",
+      "is_optional": false,
+      "code": "GS-L-UPPER-LOWER",
+      "title": "LITERACY AND CRITICAL INQUIRY (UPPER or LOWER)",
+      "description": "Literacy and Critical Inquiry (L): 3 hours",
+      "status": "not_satisfied",
+      "credits_required": 3.0,
+      "credits_earned": 0.0,
+      "credits_in_progress": 0.0,
+      "groups_required": null,
+      "notes": [
+        "0 SETS TAKEN",
+        "NEEDS: CSE 486"
+      ],
+      "courses": []
+    },
+    {
+      "seq": 15,
+      "parent_seq": null,
+      "section_type": "general_studies",
+      "is_optional": false,
+      "code": "GS-MATH",
+      "title": "MATHEMATICAL STUDIES: Mathematics (MA)",
+      "description": "Mathematics (MA): 3 hours",
+      "status": "satisfied",
+      "credits_required": 3.0,
+      "credits_earned": 3.0,
+      "credits_in_progress": 0.0,
+      "groups_required": null,
+      "notes": [
+        "NEEDS> 3.00 HOURS shown at section banner before per-course detail (Mathematics sub-requirement itself is satisfied)"
+      ],
+      "courses": [
+        {
+          "term": "FA23",
+          "term_sort": 202330,
+          "campus_flag": "M",
+          "course_code": "MAT 265",
+          "course_title": "CALCULUS FOR ENGINEERS I",
+          "credits": 3.0,
+          "grade": "C",
+          "grade_type": "graded",
+          "transfer_source": null,
+          "is_in_progress": false
+        }
+      ]
+    },
+    {
+      "seq": 16,
+      "parent_seq": null,
+      "section_type": "general_studies",
+      "is_optional": false,
+      "code": "GS-CS-QUANT",
+      "title": "COMPUTER/STATISTICS/QUANTITATIVE APPLICATIONS",
+      "description": "Computer/Statistics/Quantitative Applications (CS): 3 hours",
+      "status": "satisfied",
+      "credits_required": 3.0,
+      "credits_earned": 3.0,
+      "credits_in_progress": 0.0,
+      "groups_required": null,
+      "notes": [],
+      "courses": [
+        {
+          "term": "SU23",
+          "term_sort": 202320,
+          "campus_flag": null,
+          "course_code": "STP 226",
+          "course_title": "ELEMENTS OF STATISTICS",
+          "credits": 3.0,
+          "grade": "AP",
+          "grade_type": "exam_credit",
+          "transfer_source": null,
+          "is_in_progress": false
+        }
+      ]
+    },
+    {
+      "seq": 17,
+      "parent_seq": null,
+      "section_type": "general_studies",
+      "is_optional": false,
+      "code": "GS-HU-SB-UPPER",
+      "title": "HUMANITIES, ARTS AND DESIGN or SOCIAL - BEHAVIORAL SCIENCES (UPPER)",
+      "description": "Upper Division Humanities, Arts and Design (HU): 3 hours OR Upper Division Social - Behavioral Sciences (SB): 3 hours",
+      "status": "satisfied",
+      "credits_required": 3.0,
+      "credits_earned": 3.0,
+      "credits_in_progress": 0.0,
+      "groups_required": null,
+      "notes": [],
+      "courses": [
+        {
+          "term": "FA25",
+          "term_sort": 202530,
+          "campus_flag": "M",
+          "course_code": "PHI 304",
+          "course_title": "EXISTENTIALISM",
+          "credits": 3.0,
+          "grade": "B",
+          "grade_type": "graded",
+          "transfer_source": null,
+          "is_in_progress": false
+        }
+      ]
+    },
+    {
+      "seq": 18,
+      "parent_seq": null,
+      "section_type": "general_studies",
+      "is_optional": false,
+      "code": "GS-HU",
+      "title": "HUMANITIES, ARTS AND DESIGN",
+      "description": "Humanities, Arts and Design (HU): 6 hours",
+      "status": "satisfied",
+      "credits_required": 6.0,
+      "credits_earned": 6.0,
+      "credits_in_progress": 0.0,
+      "groups_required": null,
+      "notes": [],
+      "courses": [
+        {
+          "term": "FA24",
+          "term_sort": 202430,
+          "campus_flag": "M",
+          "course_code": "PHI 101",
+          "course_title": "INTRODUCTION TO PHILOSOPHY",
+          "credits": 3.0,
+          "grade": "A-",
+          "grade_type": "graded",
+          "transfer_source": null,
+          "is_in_progress": false
+        },
+        {
+          "term": "SU25",
+          "term_sort": 202520,
+          "campus_flag": null,
+          "course_code": "HST 102",
+          "course_title": "MODERN EUROPE",
+          "credits": 3.0,
+          "grade": "TA",
+          "grade_type": "transfer",
+          "transfer_source": "Mesa CC: HST 102",
+          "is_in_progress": false
+        }
+      ]
+    },
+    {
+      "seq": 19,
+      "parent_seq": null,
+      "section_type": "general_studies",
+      "is_optional": false,
+      "code": "GS-SB",
+      "title": "SOCIAL - BEHAVIORAL SCIENCES",
+      "description": "Social - Behavioral Sciences (SB): 6 hours",
+      "status": "satisfied",
+      "credits_required": 6.0,
+      "credits_earned": 6.0,
+      "credits_in_progress": 0.0,
+      "groups_required": null,
+      "notes": [],
+      "courses": [
+        {
+          "term": "SP24",
+          "term_sort": 202410,
+          "campus_flag": "M",
+          "course_code": "SOC 101",
+          "course_title": "INTRODUCTORY SOCIOLOGY",
+          "credits": 3.0,
+          "grade": "B",
+          "grade_type": "graded",
+          "transfer_source": null,
+          "is_in_progress": false
+        },
+        {
+          "term": "SP25",
+          "term_sort": 202510,
+          "campus_flag": "M",
+          "course_code": "COM 100",
+          "course_title": "INTRO TO HUMAN COMMUNICATION",
+          "credits": 3.0,
+          "grade": "B",
+          "grade_type": "graded",
+          "transfer_source": null,
+          "is_in_progress": false
+        }
+      ]
+    },
+    {
+      "seq": 20,
+      "parent_seq": null,
+      "section_type": "general_studies",
+      "is_optional": false,
+      "code": "GS-SQ",
+      "title": "NATURAL SCIENCES (QUANTITATIVE)",
+      "description": "Natural Science - Quantitative (SQ): 4 hours",
+      "status": "satisfied",
+      "credits_required": 4.0,
+      "credits_earned": 4.0,
+      "credits_in_progress": 0.0,
+      "groups_required": null,
+      "notes": [],
+      "courses": [
+        {
+          "term": "SU23",
+          "term_sort": 202320,
+          "campus_flag": null,
+          "course_code": "BIO 100",
+          "course_title": "THE LIVING WORLD",
+          "credits": 4.0,
+          "grade": "AP",
+          "grade_type": "exam_credit",
+          "transfer_source": null,
+          "is_in_progress": false
+        }
+      ]
+    },
+    {
+      "seq": 21,
+      "parent_seq": null,
+      "section_type": "general_studies",
+      "is_optional": false,
+      "code": "GS-SQ-SG",
+      "title": "NATURAL SCIENCES (QUANTITATIVE or GENERAL)",
+      "description": "Natural Science - Quantitative (SQ) OR Natural Science - General (SG): 4 hours",
+      "status": "satisfied",
+      "credits_required": 4.0,
+      "credits_earned": 4.0,
+      "credits_in_progress": 0.0,
+      "groups_required": null,
+      "notes": [],
+      "courses": [
+        {
+          "term": "SU24",
+          "term_sort": 202420,
+          "campus_flag": null,
+          "course_code": "GLG 101",
+          "course_title": "INTRO TO GEOLOGY I - PHYSICAL",
+          "credits": 3.0,
+          "grade": "TA",
+          "grade_type": "transfer",
+          "transfer_source": "Mesa CC: GLG 101IN",
+          "is_in_progress": false
+        },
+        {
+          "term": "SU24",
+          "term_sort": 202420,
+          "campus_flag": null,
+          "course_code": "GLG 103",
+          "course_title": "INTRO TO GEOLOGY I - PHYSICAL",
+          "credits": 1.0,
+          "grade": "TA",
+          "grade_type": "transfer",
+          "transfer_source": "Mesa CC: GLG 101IN",
+          "is_in_progress": false
+        }
+      ]
+    },
+    {
+      "seq": 22,
+      "parent_seq": null,
+      "section_type": "general_studies",
+      "is_optional": false,
+      "code": "GS-AWARENESS",
+      "title": "AWARENESS AREAS",
+      "description": "All three areas required.",
+      "status": "satisfied",
+      "credits_required": null,
+      "credits_earned": null,
+      "credits_in_progress": 0.0,
+      "groups_required": 3,
+      "notes": [],
+      "courses": []
+    },
+    {
+      "seq": 23,
+      "parent_seq": 22,
+      "section_type": "general_studies",
+      "is_optional": false,
+      "code": "AWARE-C",
+      "title": "Cultural Diversity in the U.S Awareness (C)",
+      "description": "1 Course",
+      "status": "satisfied",
+      "credits_required": null,
+      "credits_earned": 3.0,
+      "credits_in_progress": 0.0,
+      "groups_required": null,
+      "notes": [],
+      "courses": [
+        {
+          "term": "SU24",
+          "term_sort": 202420,
+          "campus_flag": "M",
+          "course_code": "COM 263",
+          "course_title": "ELEMENTS INTERCULTURAL COMM",
+          "credits": 3.0,
+          "grade": "B",
+          "grade_type": "graded",
+          "transfer_source": null,
+          "is_in_progress": false
+        }
+      ]
+    },
+    {
+      "seq": 24,
+      "parent_seq": 22,
+      "section_type": "general_studies",
+      "is_optional": false,
+      "code": "AWARE-G",
+      "title": "Global Awareness (G)",
+      "description": "1 Course",
+      "status": "satisfied",
+      "credits_required": null,
+      "credits_earned": 4.0,
+      "credits_in_progress": 0.0,
+      "groups_required": null,
+      "notes": [],
+      "courses": [
+        {
+          "term": "SU25",
+          "term_sort": 202520,
+          "campus_flag": null,
+          "course_code": "SPA 101",
+          "course_title": "ELEMENTARY SPANISH I",
+          "credits": 4.0,
+          "grade": "TA",
+          "grade_type": "transfer",
+          "transfer_source": "Mesa CC: SPA 101",
+          "is_in_progress": false
+        }
+      ]
+    },
+    {
+      "seq": 25,
+      "parent_seq": 22,
+      "section_type": "general_studies",
+      "is_optional": false,
+      "code": "AWARE-H",
+      "title": "Historical Awareness (H)",
+      "description": "1 Course",
+      "status": "satisfied",
+      "credits_required": null,
+      "credits_earned": 3.0,
+      "credits_in_progress": 0.0,
+      "groups_required": null,
+      "notes": [],
+      "courses": [
+        {
+          "term": "SU25",
+          "term_sort": 202520,
+          "campus_flag": null,
+          "course_code": "HST 102",
+          "course_title": "MODERN EUROPE",
+          "credits": 3.0,
+          "grade": "TA",
+          "grade_type": "transfer",
+          "transfer_source": "Mesa CC: HST 102",
+          "is_in_progress": false
+        }
+      ]
+    },
+    {
+      "seq": 26,
+      "parent_seq": null,
+      "section_type": "major",
+      "is_optional": false,
+      "code": "CS-LAB-SCI-LD",
+      "title": "Computer Science (Lab Science) Lower Division",
+      "description": "Lab Science: 12 hours. Must take 8 hours (SQ) from one subject area and 4 hours (SQ) from a different subject area",
+      "status": "satisfied",
+      "credits_required": 12.0,
+      "credits_earned": 12.0,
+      "credits_in_progress": 0.0,
+      "groups_required": null,
+      "notes": [],
+      "courses": [
+        {
+          "term": "SU24",
+          "term_sort": 202420,
+          "campus_flag": null,
+          "course_code": "GLG 101",
+          "course_title": "INTRO TO GEOLOGY I - PHYSICAL",
+          "credits": 3.0,
+          "grade": "TA",
+          "grade_type": "transfer",
+          "transfer_source": "Mesa CC: GLG 101IN",
+          "is_in_progress": false
+        },
+        {
+          "term": "SU24",
+          "term_sort": 202420,
+          "campus_flag": null,
+          "course_code": "GLG 103",
+          "course_title": "INTRO TO GEOLOGY I - PHYSICAL",
+          "credits": 1.0,
+          "grade": "TA",
+          "grade_type": "transfer",
+          "transfer_source": "Mesa CC: GLG 101IN",
+          "is_in_progress": false
+        },
+        {
+          "term": "SU25",
+          "term_sort": 202520,
+          "campus_flag": null,
+          "course_code": "GLG 110",
+          "course_title": "GEOLGCL DISASTRS RTHE ENVIRNM",
+          "credits": 3.0,
+          "grade": "TA",
+          "grade_type": "transfer",
+          "transfer_source": "Mesa CC: GLG 110IN",
+          "is_in_progress": false
+        },
+        {
+          "term": "SU25",
+          "term_sort": 202520,
+          "campus_flag": null,
+          "course_code": "GLG 111",
+          "course_title": "GEOLGCL DISASTRS RTHE ENVIRNM",
+          "credits": 1.0,
+          "grade": "TA",
+          "grade_type": "transfer",
+          "transfer_source": "Mesa CC: GLG 110IN",
+          "is_in_progress": false
+        },
+        {
+          "term": "SU23",
+          "term_sort": 202320,
+          "campus_flag": null,
+          "course_code": "BIO 100",
+          "course_title": "THE LIVING WORLD",
+          "credits": 4.0,
+          "grade": "AP",
+          "grade_type": "exam_credit",
+          "transfer_source": null,
+          "is_in_progress": false
+        }
+      ]
+    },
+    {
+      "seq": 27,
+      "parent_seq": null,
+      "section_type": "major",
+      "is_optional": false,
+      "code": "CS-MATH-LD",
+      "title": "Computer Science (Mathematics) Lower Division",
+      "description": "12 hours",
+      "status": "satisfied",
+      "credits_required": 12.0,
+      "credits_earned": 12.0,
+      "credits_in_progress": 0.0,
+      "groups_required": null,
+      "notes": [],
+      "courses": []
+    },
+    {
+      "seq": 28,
+      "parent_seq": 27,
+      "section_type": "major",
+      "is_optional": false,
+      "code": "MAT243",
+      "title": "MAT 243",
+      "description": "3 hours, C minimum",
+      "status": "satisfied",
+      "credits_required": 3.0,
+      "credits_earned": 3.0,
+      "credits_in_progress": 0.0,
+      "groups_required": null,
+      "notes": [],
+      "courses": [
+        {
+          "term": "FA24",
+          "term_sort": 202430,
+          "campus_flag": "M",
+          "course_code": "MAT 243",
+          "course_title": "DISCRETE MATH STRUCTURES",
+          "credits": 3.0,
+          "grade": "C",
+          "grade_type": "graded",
+          "transfer_source": null,
+          "is_in_progress": false
+        }
+      ]
+    },
+    {
+      "seq": 29,
+      "parent_seq": 27,
+      "section_type": "major",
+      "is_optional": false,
+      "code": "MAT265-MA",
+      "title": "MAT 265 (MA)",
+      "description": "3 hours, C minimum",
+      "status": "satisfied",
+      "credits_required": 3.0,
+      "credits_earned": 3.0,
+      "credits_in_progress": 0.0,
+      "groups_required": null,
+      "notes": [],
+      "courses": [
+        {
+          "term": "FA23",
+          "term_sort": 202330,
+          "campus_flag": "M",
+          "course_code": "MAT 265",
+          "course_title": "CALCULUS FOR ENGINEERS I",
+          "credits": 3.0,
+          "grade": "C",
+          "grade_type": "graded",
+          "transfer_source": null,
+          "is_in_progress": false
+        }
+      ]
+    },
+    {
+      "seq": 30,
+      "parent_seq": 27,
+      "section_type": "major",
+      "is_optional": false,
+      "code": "MAT266-MA",
+      "title": "MAT 266 (MA)",
+      "description": "3 hours, C minimum",
+      "status": "satisfied",
+      "credits_required": 3.0,
+      "credits_earned": 3.0,
+      "credits_in_progress": 0.0,
+      "groups_required": null,
+      "notes": [],
+      "courses": [
+        {
+          "term": "SP24",
+          "term_sort": 202410,
+          "campus_flag": "M",
+          "course_code": "MAT 266",
+          "course_title": "CALCULUS FOR ENGINEERS II",
+          "credits": 3.0,
+          "grade": "C",
+          "grade_type": "graded",
+          "transfer_source": null,
+          "is_in_progress": false
+        }
+      ]
+    },
+    {
+      "seq": 31,
+      "parent_seq": 27,
+      "section_type": "major",
+      "is_optional": false,
+      "code": "MAT267-CSE259-MAT275",
+      "title": "MAT 267 (MA) OR CSE 259 OR MAT 275 (MA)",
+      "description": "3 hours, C minimum",
+      "status": "satisfied",
+      "credits_required": 3.0,
+      "credits_earned": 3.0,
+      "credits_in_progress": 0.0,
+      "groups_required": null,
+      "notes": [],
+      "courses": [
+        {
+          "term": "FA25",
+          "term_sort": 202530,
+          "campus_flag": "M",
+          "course_code": "CSE 259",
+          "course_title": "LOGIC IN COMPUTER SCIENCE",
+          "credits": 3.0,
+          "grade": "B",
+          "grade_type": "graded",
+          "transfer_source": null,
+          "is_in_progress": false
+        }
+      ]
+    },
+    {
+      "seq": 32,
+      "parent_seq": null,
+      "section_type": "major",
+      "is_optional": false,
+      "code": "CS-LD",
+      "title": "Computer Science Lower Division: 17 hours",
+      "description": null,
+      "status": "satisfied",
+      "credits_required": 17.0,
+      "credits_earned": 17.0,
+      "credits_in_progress": 0.0,
+      "groups_required": null,
+      "notes": [
+        "COURSES IN THIS SECTION CANNOT BE USED TOWARD A MINOR"
+      ],
+      "courses": []
+    },
+    {
+      "seq": 33,
+      "parent_seq": 32,
+      "section_type": "major",
+      "is_optional": false,
+      "code": "CSE110-CS",
+      "title": "CSE 110 (CS)",
+      "description": "3 hours, C minimum",
+      "status": "satisfied",
+      "credits_required": 3.0,
+      "credits_earned": 3.0,
+      "credits_in_progress": 0.0,
+      "groups_required": null,
+      "notes": [
+        "3.00 GPA"
+      ],
+      "courses": [
+        {
+          "term": "FA23",
+          "term_sort": 202330,
+          "campus_flag": "M",
+          "course_code": "CSE 110",
+          "course_title": "PRINCIPLES OF PROGRAMMING",
+          "credits": 3.0,
+          "grade": "B",
+          "grade_type": "graded",
+          "transfer_source": null,
+          "is_in_progress": false
+        }
+      ]
+    },
+    {
+      "seq": 34,
+      "parent_seq": 32,
+      "section_type": "major",
+      "is_optional": false,
+      "code": "CSE120",
+      "title": "CSE 120",
+      "description": "3 hours, C minimum",
+      "status": "satisfied",
+      "credits_required": 3.0,
+      "credits_earned": 3.0,
+      "credits_in_progress": 0.0,
+      "groups_required": null,
+      "notes": [
+        "3.00 GPA"
+      ],
+      "courses": [
+        {
+          "term": "FA24",
+          "term_sort": 202430,
+          "campus_flag": "M",
+          "course_code": "EEE 120",
+          "course_title": "DIGITAL DESIGN FUNDAMENTALS",
+          "credits": 3.0,
+          "grade": "B",
+          "grade_type": "graded",
+          "transfer_source": null,
+          "is_in_progress": false
+        }
+      ]
+    },
+    {
+      "seq": 35,
+      "parent_seq": 32,
+      "section_type": "major",
+      "is_optional": false,
+      "code": "CSE205-CS",
+      "title": "CSE 205 (CS)",
+      "description": "3 hours, C minimum",
+      "status": "satisfied",
+      "credits_required": 3.0,
+      "credits_earned": 3.0,
+      "credits_in_progress": 0.0,
+      "groups_required": null,
+      "notes": [
+        "2.00 GPA"
+      ],
+      "courses": [
+        {
+          "term": "SP24",
+          "term_sort": 202410,
+          "campus_flag": "M",
+          "course_code": "CSE 205",
+          "course_title": "OBJECT-ORIENTED PROGRAM & DAT",
+          "credits": 3.0,
+          "grade": "C",
+          "grade_type": "graded",
+          "transfer_source": null,
+          "is_in_progress": false
+        }
+      ]
+    },
+    {
+      "seq": 36,
+      "parent_seq": 32,
+      "section_type": "major",
+      "is_optional": false,
+      "code": "CSE230",
+      "title": "CSE 230",
+      "description": "3 hours, C minimum",
+      "status": "satisfied",
+      "credits_required": 3.0,
+      "credits_earned": 3.0,
+      "credits_in_progress": 0.0,
+      "groups_required": null,
+      "notes": [
+        "2.33 GPA"
+      ],
+      "courses": [
+        {
+          "term": "FA24",
+          "term_sort": 202430,
+          "campus_flag": "M",
+          "course_code": "CSE 230",
+          "course_title": "COMPUTER ORG/ASSEMB LANG PROG",
+          "credits": 3.0,
+          "grade": "C+",
+          "grade_type": "graded",
+          "transfer_source": null,
+          "is_in_progress": false
+        }
+      ]
+    },
+    {
+      "seq": 37,
+      "parent_seq": 32,
+      "section_type": "major",
+      "is_optional": false,
+      "code": "CSE240",
+      "title": "CSE 240",
+      "description": "3 hours, C minimum",
+      "status": "satisfied",
+      "credits_required": 3.0,
+      "credits_earned": 3.0,
+      "credits_in_progress": 0.0,
+      "groups_required": null,
+      "notes": [
+        "2.00 GPA"
+      ],
+      "courses": [
+        {
+          "term": "SP25",
+          "term_sort": 202510,
+          "campus_flag": "M",
+          "course_code": "CSE 240",
+          "course_title": "INTRO TO PROGRAMMING LANGUAGE",
+          "credits": 3.0,
+          "grade": "C",
+          "grade_type": "graded",
+          "transfer_source": null,
+          "is_in_progress": false
+        }
+      ]
+    },
+    {
+      "seq": 38,
+      "parent_seq": 32,
+      "section_type": "major",
+      "is_optional": false,
+      "code": "FSE100",
+      "title": "FSE 100",
+      "description": "2 hours, C minimum",
+      "status": "satisfied",
+      "credits_required": 2.0,
+      "credits_earned": 2.0,
+      "credits_in_progress": 0.0,
+      "groups_required": null,
+      "notes": [
+        "4.00 GPA"
+      ],
+      "courses": [
+        {
+          "term": "FA23",
+          "term_sort": 202330,
+          "campus_flag": "M",
+          "course_code": "FSE 100",
+          "course_title": "INTRODUCTION TO ENGINEERING",
+          "credits": 2.0,
+          "grade": "A",
+          "grade_type": "graded",
+          "transfer_source": null,
+          "is_in_progress": false
+        }
+      ]
+    },
+    {
+      "seq": 39,
+      "parent_seq": null,
+      "section_type": "major",
+      "is_optional": false,
+      "code": "CS-UD",
+      "title": "Computer Science Upper Division: 31 hours",
+      "description": null,
+      "status": "not_satisfied",
+      "credits_required": 31.0,
+      "credits_earned": 16.0,
+      "credits_in_progress": 9.0,
+      "groups_required": null,
+      "notes": [
+        "COURSES IN THIS SECTION CANNOT BE USED TOWARD A MINOR",
+        "NEEDS> 6.00 HOURS"
+      ],
+      "courses": []
+    },
+    {
+      "seq": 40,
+      "parent_seq": 39,
+      "section_type": "major",
+      "is_optional": false,
+      "code": "CSE301",
+      "title": "CSE 301",
+      "description": "1 hour, C minimum",
+      "status": "satisfied",
+      "credits_required": 1.0,
+      "credits_earned": 1.0,
+      "credits_in_progress": 0.0,
+      "groups_required": null,
+      "notes": [],
+      "courses": [
+        {
+          "term": "FA24",
+          "term_sort": 202430,
+          "campus_flag": "M",
+          "course_code": "CSE 301",
+          "course_title": "COMPUTING ETHICS",
+          "credits": 1.0,
+          "grade": "A",
+          "grade_type": "graded",
+          "transfer_source": null,
+          "is_in_progress": false
+        }
+      ]
+    },
+    {
+      "seq": 41,
+      "parent_seq": 39,
+      "section_type": "major",
+      "is_optional": false,
+      "code": "CSE310",
+      "title": "CSE 310",
+      "description": "3 hours, C minimum",
+      "status": "satisfied",
+      "credits_required": 3.0,
+      "credits_earned": 3.0,
+      "credits_in_progress": 0.0,
+      "groups_required": null,
+      "notes": [
+        "1.00 GPA",
+        "Failed SP25 (E), retaken SP26 (C) \u2014 the sequencing wall that delays CSE 360/485/486"
+      ],
+      "courses": [
+        {
+          "term": "SP25",
+          "term_sort": 202510,
+          "campus_flag": "M",
+          "course_code": "CSE 310",
+          "course_title": "DATA STRUCTURES AND ALGORITHM",
+          "credits": 3.0,
+          "grade": "E",
+          "grade_type": "graded",
+          "transfer_source": null,
+          "is_in_progress": false
+        },
+        {
+          "term": "SP26",
+          "term_sort": 202610,
+          "campus_flag": "M",
+          "course_code": "CSE 310",
+          "course_title": "DATA STRUCTURES AND ALGORITHM",
+          "credits": 3.0,
+          "grade": "C",
+          "grade_type": "graded",
+          "transfer_source": null,
+          "is_in_progress": false
+        }
+      ]
+    },
+    {
+      "seq": 42,
+      "parent_seq": 39,
+      "section_type": "major",
+      "is_optional": false,
+      "code": "CSE330",
+      "title": "CSE 330",
+      "description": "3 hours, C minimum",
+      "status": "in_progress",
+      "credits_required": 3.0,
+      "credits_earned": 0.0,
+      "credits_in_progress": 3.0,
+      "groups_required": null,
+      "notes": [],
+      "courses": [
+        {
+          "term": "FA26",
+          "term_sort": 202630,
+          "campus_flag": "M",
+          "course_code": "CSE 330",
+          "course_title": "OPERATING SYSTEMS",
+          "credits": 3.0,
+          "grade": "NR",
+          "grade_type": "in_progress",
+          "transfer_source": null,
+          "is_in_progress": true
+        }
+      ]
+    },
+    {
+      "seq": 43,
+      "parent_seq": 39,
+      "section_type": "major",
+      "is_optional": false,
+      "code": "CSE340",
+      "title": "CSE 340",
+      "description": "3 hours, C minimum",
+      "status": "in_progress",
+      "credits_required": 3.0,
+      "credits_earned": 0.0,
+      "credits_in_progress": 3.0,
+      "groups_required": null,
+      "notes": [],
+      "courses": [
+        {
+          "term": "FA26",
+          "term_sort": 202630,
+          "campus_flag": "M",
+          "course_code": "CSE 340",
+          "course_title": "PRINCIPLES OF PROGRAMMING LAN",
+          "credits": 3.0,
+          "grade": "NR",
+          "grade_type": "in_progress",
+          "transfer_source": null,
+          "is_in_progress": true
+        }
+      ]
+    },
+    {
+      "seq": 44,
+      "parent_seq": 39,
+      "section_type": "major",
+      "is_optional": false,
+      "code": "CSE355",
+      "title": "CSE 355",
+      "description": "3 hours, C minimum",
+      "status": "satisfied",
+      "credits_required": 3.0,
+      "credits_earned": 3.0,
+      "credits_in_progress": 0.0,
+      "groups_required": null,
+      "notes": [
+        "2.00 GPA"
+      ],
+      "courses": [
+        {
+          "term": "SP26",
+          "term_sort": 202610,
+          "campus_flag": "M",
+          "course_code": "CSE 355",
+          "course_title": "INTRO THEORETICAL COMPUTER SC",
+          "credits": 3.0,
+          "grade": "C",
+          "grade_type": "graded",
+          "transfer_source": null,
+          "is_in_progress": false
+        }
+      ]
+    },
+    {
+      "seq": 45,
+      "parent_seq": 39,
+      "section_type": "major",
+      "is_optional": false,
+      "code": "CSE360",
+      "title": "CSE 360",
+      "description": "3 hours, C minimum",
+      "status": "in_progress",
+      "credits_required": 3.0,
+      "credits_earned": 0.0,
+      "credits_in_progress": 3.0,
+      "groups_required": null,
+      "notes": [],
+      "courses": [
+        {
+          "term": "FA26",
+          "term_sort": 202630,
+          "campus_flag": "M",
+          "course_code": "CSE 360",
+          "course_title": "INTRO TO SOFTWARE ENGINEERING",
+          "credits": 3.0,
+          "grade": "NR",
+          "grade_type": "in_progress",
+          "transfer_source": null,
+          "is_in_progress": true
+        }
+      ]
+    },
+    {
+      "seq": 46,
+      "parent_seq": 39,
+      "section_type": "major",
+      "is_optional": false,
+      "code": "CSE365",
+      "title": "CSE 365",
+      "description": "3 hours, C minimum",
+      "status": "satisfied",
+      "credits_required": 3.0,
+      "credits_earned": 3.0,
+      "credits_in_progress": 0.0,
+      "groups_required": null,
+      "notes": [],
+      "courses": [
+        {
+          "term": "SP26",
+          "term_sort": 202610,
+          "campus_flag": "M",
+          "course_code": "CSE 365",
+          "course_title": "INFORMATION ASSURANCE",
+          "credits": 3.0,
+          "grade": "B",
+          "grade_type": "graded",
+          "transfer_source": null,
+          "is_in_progress": false
+        }
+      ]
+    },
+    {
+      "seq": 47,
+      "parent_seq": 39,
+      "section_type": "major",
+      "is_optional": false,
+      "code": "CSE485-L",
+      "title": "CSE 485 (L)",
+      "description": "3 hours, C minimum",
+      "status": "not_satisfied",
+      "credits_required": 3.0,
+      "credits_earned": 0.0,
+      "credits_in_progress": 0.0,
+      "groups_required": null,
+      "notes": [
+        "NEEDS: CSE 485",
+        "PREREQ: CSE 360 (IN PROGRESS FA26)"
+      ],
+      "courses": []
+    },
+    {
+      "seq": 48,
+      "parent_seq": 39,
+      "section_type": "major",
+      "is_optional": false,
+      "code": "CSE486-L",
+      "title": "CSE 486 (L)",
+      "description": "3 hours, C minimum",
+      "status": "not_satisfied",
+      "credits_required": 3.0,
+      "credits_earned": 0.0,
+      "credits_in_progress": 0.0,
+      "groups_required": null,
+      "notes": [
+        "NEEDS: CSE 486",
+        "PREREQ: CSE 485 (NOT STARTED)"
+      ],
+      "courses": []
+    },
+    {
+      "seq": 49,
+      "parent_seq": 39,
+      "section_type": "major",
+      "is_optional": false,
+      "code": "IEE380-CS",
+      "title": "IEE 380 (CS)",
+      "description": "3 hours, C minimum",
+      "status": "satisfied",
+      "credits_required": 3.0,
+      "credits_earned": 3.0,
+      "credits_in_progress": 0.0,
+      "groups_required": null,
+      "notes": [],
+      "courses": [
+        {
+          "term": "FA25",
+          "term_sort": 202530,
+          "campus_flag": "M",
+          "course_code": "IEE 380",
+          "course_title": "PROB & STATS ENGR PROB SOLVIN",
+          "credits": 3.0,
+          "grade": "C+",
+          "grade_type": "graded",
+          "transfer_source": null,
+          "is_in_progress": false
+        }
+      ]
+    },
+    {
+      "seq": 50,
+      "parent_seq": 39,
+      "section_type": "major",
+      "is_optional": false,
+      "code": "MAT343",
+      "title": "MAT 343",
+      "description": "3 hours, C minimum",
+      "status": "satisfied",
+      "credits_required": 3.0,
+      "credits_earned": 3.0,
+      "credits_in_progress": 0.0,
+      "groups_required": null,
+      "notes": [
+        "2.00 GPA"
+      ],
+      "courses": [
+        {
+          "term": "FA25",
+          "term_sort": 202530,
+          "campus_flag": "M",
+          "course_code": "MAT 343",
+          "course_title": "APPLIED LINEAR ALGEBRA",
+          "credits": 3.0,
+          "grade": "C",
+          "grade_type": "graded",
+          "transfer_source": null,
+          "is_in_progress": false
+        }
+      ]
+    },
+    {
+      "seq": 51,
+      "parent_seq": null,
+      "section_type": "major",
+      "is_optional": false,
+      "code": "CS-ELECTIVES",
+      "title": "BS COMPUTER SCIENCE ELECTIVES",
+      "description": null,
+      "status": "not_satisfied",
+      "credits_required": null,
+      "credits_earned": 3.0,
+      "credits_in_progress": 6.0,
+      "groups_required": null,
+      "notes": [
+        "COURSES IN THIS SECTION CANNOT BE USED TOWARD A MINOR",
+        "Students can apply up to 3 total hours of FSE 301 or CSE 484 and FSE 404.",
+        "FSE 301 or CSE 484, 492, 493, 499, 404 total of 6 maximum hours can apply to degree.",
+        "Students can apply FSE 301 or CSE 484 but not both.",
+        "Students can apply DAT 402 or CSE 475 but not both.",
+        "NEEDS> 12.00 HOURS"
+      ],
+      "courses": []
+    },
+    {
+      "seq": 52,
+      "parent_seq": 51,
+      "section_type": "major",
+      "is_optional": false,
+      "code": "CSE412-434-445",
+      "title": "CSE 412 OR CSE 434 OR CSE 445",
+      "description": "3 hours, C minimum",
+      "status": "in_progress",
+      "credits_required": 3.0,
+      "credits_earned": 0.0,
+      "credits_in_progress": 3.0,
+      "groups_required": null,
+      "notes": [],
+      "courses": [
+        {
+          "term": "FA26",
+          "term_sort": 202630,
+          "campus_flag": "M",
+          "course_code": "CSE 445",
+          "course_title": "DISTRIBUTED SOFTWARE DEVELOPM",
+          "credits": 3.0,
+          "grade": "NR",
+          "grade_type": "in_progress",
+          "transfer_source": null,
+          "is_in_progress": true
+        }
+      ]
+    },
+    {
+      "seq": 53,
+      "parent_seq": 51,
+      "section_type": "major",
+      "is_optional": false,
+      "code": "CSE4XX-ELECTIVES",
+      "title": "CSE 4** Electives: 12 hours",
+      "description": "12 hours, C minimum.",
+      "status": "in_progress",
+      "credits_required": 12.0,
+      "credits_earned": 0.0,
+      "credits_in_progress": 3.0,
+      "groups_required": null,
+      "notes": [
+        "NEEDS: 9.00 HOURS CSE 4**"
+      ],
+      "courses": [
+        {
+          "term": "FA26",
+          "term_sort": 202630,
+          "campus_flag": "M",
+          "course_code": "CSE 412",
+          "course_title": "DATABASE MANAGEMENT",
+          "credits": 3.0,
+          "grade": "NR",
+          "grade_type": "in_progress",
+          "transfer_source": null,
+          "is_in_progress": true
+        }
+      ]
+    },
+    {
+      "seq": 54,
+      "parent_seq": 51,
+      "section_type": "major",
+      "is_optional": false,
+      "code": "UD-TECH-ELECTIVES",
+      "title": "Upper Division Technical Electives: 6 hours",
+      "description": "6 hours, C minimum",
+      "status": "not_satisfied",
+      "credits_required": 6.0,
+      "credits_earned": 3.0,
+      "credits_in_progress": 0.0,
+      "groups_required": null,
+      "notes": [
+        "DAT COURSE TO MINOR",
+        "FSE 394= TECH ELECT",
+        "NEEDS: 3.00 HOURS"
+      ],
+      "courses": [
+        {
+          "term": "SU26",
+          "term_sort": 202620,
+          "campus_flag": "M",
+          "course_code": "FSE 301",
+          "course_title": "ENTREPRENEUR & VALUE CREATION",
+          "credits": 3.0,
+          "grade": "B",
+          "grade_type": "graded",
+          "transfer_source": null,
+          "is_in_progress": false
+        }
+      ]
+    },
+    {
+      "seq": 55,
+      "parent_seq": null,
+      "section_type": "gpa",
+      "is_optional": false,
+      "code": "MAJOR-GPA",
+      "title": "BS COMPUTER SCIENCE MAJOR GPA",
+      "description": "2.00 Minimum Cumulative GPA.",
+      "status": "satisfied",
+      "credits_required": 2.0,
+      "credits_earned": null,
+      "credits_in_progress": 0.0,
+      "groups_required": null,
+      "notes": [
+        "EARNED: 2.31 GPA"
+      ],
+      "courses": []
+    },
+    {
+      "seq": 56,
+      "parent_seq": null,
+      "section_type": "informational",
+      "is_optional": false,
+      "code": "MINOR-VERIFY",
+      "title": "Major Verification for Minors",
+      "description": "Student is not active in a Minor Plan Type.",
+      "status": "informational",
+      "credits_required": null,
+      "credits_earned": null,
+      "credits_in_progress": 0.0,
+      "groups_required": null,
+      "notes": [],
+      "courses": []
+    },
+    {
+      "seq": 57,
+      "parent_seq": null,
+      "section_type": "informational",
+      "is_optional": true,
+      "code": "OPT-NEEDS-HOURS",
+      "title": "TOTAL HOURS REQUIRED TO COMPLETE THE DEGREE",
+      "description": "This NEEDS HOURS section is for STUDENT ATHLETE DEVELOPMENT ONLY.",
+      "status": "informational",
+      "credits_required": null,
+      "credits_earned": null,
+      "credits_in_progress": 0.0,
+      "groups_required": null,
+      "notes": [
+        "NEEDS: 129.00 HOURS"
+      ],
+      "courses": []
+    },
+    {
+      "seq": 58,
+      "parent_seq": null,
+      "section_type": "informational",
+      "is_optional": true,
+      "code": "OPT-ELECTIVES",
+      "title": "ELECTIVES",
+      "description": "Courses not used to meet specific degree requirements.",
+      "status": "informational",
+      "credits_required": null,
+      "credits_earned": 4.0,
+      "credits_in_progress": 0.0,
+      "groups_required": null,
+      "notes": [],
+      "courses": [
+        {
+          "term": "SU25",
+          "term_sort": 202520,
+          "campus_flag": null,
+          "course_code": "SPA 102",
+          "course_title": "ELEMENTARY SPANISH II",
+          "credits": 4.0,
+          "grade": "TA",
+          "grade_type": "transfer",
+          "transfer_source": "Mesa CC: SPA 102",
+          "is_in_progress": false
+        }
+      ]
+    }
+  ]
+}
