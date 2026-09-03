@@ -384,7 +384,8 @@ POST   /auth/login                    → JWT
 GET    /me                            → profile + record + unread advisor replies
 POST   /chat                          → streaming completion, runs the tool loop
 GET    /tickets                       → student's open tickets
-POST   /tickets/:id/send              → student sends (or edits then sends) the draft
+GET    /tickets/:id                   → one ticket + its message thread
+POST   /tickets                       → student sends the (edited) escalation draft
 POST   /tickets/:id/messages          → student follow-up, if bot re-escalates
 POST   /tickets/:id/resolve           → either party
 
@@ -392,6 +393,12 @@ GET    /advisor/tickets               → queue, scoped to this advisor's studen
 GET    /advisor/tickets/:id           → summary + email thread + transcript
 POST   /advisor/tickets/:id/reply     → advisor reply
 ```
+
+Creation is `POST /tickets`, not `POST /tickets/:id/send`: no draft is ever
+persisted, so there's no id to address until the student confirms. The model's
+draft lives only in the chat response (an `escalation` SSE event) until then —
+which is what makes "the student can edit it before sending" true rather than
+merely presentational.
 
 ---
 
@@ -434,9 +441,9 @@ Dependency-ordered. Each phase is demoable on its own.
 | 2 | **DARS tools** — summary, unmet requirements, graduation projection, requirement detail, in-progress | "Am I on track?" correctly says no for the at-risk persona, yes for the sample, zero invented numbers either way |
 | 3 | **KB ingestion** — `seeds.yaml`, fetch/cache, extract, chunk, embed, hybrid query | `search_policy_kb("clubs for my major")` returns the right chunk; eval set passes |
 | 4 | **Chat endpoint** — system prompt, full tool loop, streaming | curl each of the six §6.4 questions, get grounded answers |
-| 5 | **Extension shell** — MV3 injection, shadow DOM, chat UI, `x`/`−` controls, login | Widget appears on a real ASU page and holds a conversation |
-| 6 | **Escalation** — `escalate_to_advisor`, ticket creation, AI summary, editable draft, send | Ticket lands in the DB, assigned to the right advisor |
-| 7 | **Advisor web app** — login, scoped queue, ticket detail, reply, resolve | Advisor answers a ticket end to end |
+| 5 | ~~**Extension shell** — MV3 injection, shadow DOM, chat UI, `x`/`−` controls, login~~ | ✅ Widget appears on a real ASU page and holds a conversation |
+| 6 | ~~**Escalation** — `escalate_to_advisor`, ticket creation, AI summary, editable draft, send~~ | ✅ Ticket lands in the DB, assigned to the right advisor |
+| 7 | **Advisor web app** — login, scoped queue, ticket detail, reply, resolve | Advisor answers a ticket end to end — *owned by teammate, see §12* |
 | 8 | **Loop closure** — unread reply card, icon badge, bot-mediated follow-ups | Full circle demoable in one take |
 | 9 | **Landing page + polish** | Judge-ready |
 | — | *Voice assistant* | Deferred. Mic permission stays out of the manifest until we build it |
@@ -454,6 +461,8 @@ Dependency-ordered. Each phase is demoable on its own.
 - [ ] **Verify the `NO` marker notation** against a real unmet audit if one becomes available — currently reconstructed, not observed.
 - [x] ~~**KB seed URLs**~~ — `seeds.yaml` has a first curated set: 6 hand-written procedural entries (withdrawal, add/drop, change of major, transcript, suspension appeal, late-registration petition) plus 3 scraped directory pages (4+1, internships, undergrad research). The club directory API endpoint is stubbed but not wired — needs a shape-specific parser (see `scripts/ingest_kb.py`). Expand as advisors flag more high-traffic questions.
 - [ ] Seed personas — how many students/advisors, and whose situation does the demo follow?
+- [ ] **Watch escalation eagerness.** `escalate_to_advisor` is reachable at any tool round with only prompt guidance holding it back. If the model escalates before trying DARS/KB, add a gate in `app/llm/tool_loop.py`: track tool names called this turn and reject an escalation that arrives before any lookup, returning an error tool result that tells it to search first.
+- [ ] **Bundle webfonts?** The widget uses installed faces because a content script's `@font-face` is subject to the host page's CSP. If ASU pages turn out to permit it, shipping two woff2 files as `web_accessible_resources` would tighten the display type.
 
 ---
 
@@ -471,3 +480,7 @@ Settled, so we don't relitigate:
 - **DARS is the authority on degree progress.** The bot reads requirement status; it never computes credit math and never answers a degree question from embeddings.
 - **DARS seed data is hand-transcribed first**, parser second. A general uAchieve parser is not on the critical path.
 - **KB is curated, not crawled.** Directories get scraped; procedures get hand-written.
+- **Escalation is a judgment call, not a counter.** Nothing enforces "try N tools before escalating" — the system prompt steers it and the tool loop allows it at any round. A hard gate is available if testing shows the model bailing too early (see §11).
+- **The draft is student-owned.** `escalate_to_advisor` writes nothing; it returns a draft the widget renders as an editable memo, and only `POST /tickets` persists anything. "The student can edit it before sending" is enforced by the architecture, not by UI convention.
+- **Widget design direction: editorial dossier.** Near-square geometry, one warm bone neutral family, maroon dominant with gold used only structurally (rules, stamps, cursor, focus). Vizor's replies are transcript text under a hairline, not bubbles; the escalation draft is a carbon-copy memo with a NOT SENT → SENT stamp. Chosen because the product's pitch is an artifact handed to an advisor — a document aesthetic reinforces that where a chat-bubble aesthetic fights it. Type comes from installed faces (Iowan Old Style / mono / Helvetica), since a content script can't reliably load webfonts past a host page's CSP.
+- **Team split:** a teammate owns the advisor web app (Phase 7 — login, queue, ticket detail, reply, resolve). Our work here focuses purely on refining the chatbot extension (Phases 6, 8+) — escalation flow, chat quality, widget UX.

@@ -17,6 +17,7 @@ from app.db.client import get_supabase
 from app.llm.client import get_llm_client
 from app.llm.prompts import build_system_prompt
 from app.llm.tool_loop import run_tool_loop, stream_words
+from app.tickets.tools import NAME as ESCALATE_TOOL_NAME
 from app.config import get_settings
 
 router = APIRouter(tags=["chat"])
@@ -107,6 +108,27 @@ def _persist_new_turns(conversation_id: str, new_messages: list[dict]) -> None:
     sb.table("conversations").update({"last_message_at": "now()"}).eq("id", conversation_id).execute()
 
 
+def _find_escalation_draft(new_turns: list[dict]) -> dict | None:
+    """If the model called escalate_to_advisor this turn, pull out the draft
+    it produced (already echoed back verbatim in the tool result — see
+    app/tickets/tools.py) so the router can surface it to the widget as a
+    distinct SSE event, editable before the student sends it."""
+    for msg in new_turns:
+        if msg.get("role") != "assistant" or not msg.get("tool_calls"):
+            continue
+        for call in msg["tool_calls"]:
+            if call["function"]["name"] != ESCALATE_TOOL_NAME:
+                continue
+            call_id = call["id"]
+            result = next(
+                (m for m in new_turns if m.get("role") == "tool" and m.get("tool_call_id") == call_id),
+                None,
+            )
+            if result is not None:
+                return json.loads(result["content"])
+    return None
+
+
 @router.post("/chat")
 def chat(body: ChatRequest, user: CurrentUser = Depends(require_student)) -> StreamingResponse:
     student = _load_student(user)
@@ -133,9 +155,13 @@ def chat(body: ChatRequest, user: CurrentUser = Depends(require_student)) -> Str
     _persist_new_turns(conversation_id, new_turns)
 
     final_answer = new_turns[-1]["content"] or ""
+    escalation = _find_escalation_draft(new_turns)
 
     def sse() -> Iterator[str]:
         yield f"event: conversation\ndata: {json.dumps({'conversation_id': conversation_id})}\n\n"
+        if escalation is not None:
+            payload = {**escalation, "advisor_name": advisor_name}
+            yield f"event: escalation\ndata: {json.dumps(payload)}\n\n"
         for chunk in stream_words(final_answer):
             yield f"data: {json.dumps({'delta': chunk})}\n\n"
         yield "event: done\ndata: {}\n\n"

@@ -20,7 +20,10 @@ def build_system_prompt(
         "get_graduation_projection (not credit totals) for on-track "
         "questions. Use search_policy_kb for policy/procedure/club/"
         "opportunity questions and include any form_url/source_url returned. "
-        "For judgment calls about the student's life, say it needs their "
-        "advisor rather than guessing. Be concise; quote only real numbers "
-        "from the tools."
+        "For judgment calls about the student's life, or anything you can't "
+        "resolve from DARS or the KB, call escalate_to_advisor instead of "
+        "guessing or dead-ending the student — it drafts a message the "
+        "student reviews before it's sent, so it's safe to use whenever "
+        "you're genuinely stuck. Be concise; quote only real numbers from "
+        "the tools."
     )

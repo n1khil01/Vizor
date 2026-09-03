@@ -13,9 +13,13 @@ from app.dars.tools import TOOL_DEFS as DARS_TOOL_DEFS
 from app.dars.tools import call_dars_tool
 from app.kb.tools import TOOL_DEFS as KB_TOOL_DEFS
 from app.kb.tools import call_kb_tool
+from app.tickets.tools import NAME as ESCALATE_TOOL_NAME
+from app.tickets.tools import TOOL_DEFS as TICKET_TOOL_DEFS
+from app.tickets.tools import call_ticket_tool
 
-TOOL_DEFS = DARS_TOOL_DEFS + KB_TOOL_DEFS
+TOOL_DEFS = DARS_TOOL_DEFS + KB_TOOL_DEFS + TICKET_TOOL_DEFS
 _DARS_TOOL_NAMES = {t["function"]["name"] for t in DARS_TOOL_DEFS}
+_TICKET_TOOL_NAMES = {t["function"]["name"] for t in TICKET_TOOL_DEFS}
 
 MAX_TOOL_ROUNDS = 6
 
@@ -23,6 +27,8 @@ MAX_TOOL_ROUNDS = 6
 def _dispatch(name: str, student_id: str, arguments: dict) -> dict | list:
     if name in _DARS_TOOL_NAMES:
         return call_dars_tool(name, student_id, arguments)
+    if name in _TICKET_TOOL_NAMES:
+        return call_ticket_tool(name, arguments)
     return call_kb_tool(name, arguments)
 
 
