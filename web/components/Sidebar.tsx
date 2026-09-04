@@ -11,6 +11,8 @@ import {
   ReportsIcon,
   SignOutIcon,
 } from "@/components/icons";
+import { VizorMark } from "@/components/VizorMark";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { signOutAction } from "@/lib/actions";
 
 const NAV = [
@@ -31,15 +33,22 @@ export function Sidebar({ advisorName }: { advisorName: string }) {
   return (
     <aside className="w-14 sm:w-56 shrink-0 border-r border-rule bg-paper-raised flex flex-col h-dvh sticky top-0">
       <div className="h-14 flex items-center px-3 sm:px-4 border-b border-rule">
+        {/* The brand mark returns to the public landing page — "Overview"
+            in the nav below is the dedicated in-app home, so this doesn't
+            duplicate it. */}
         <Link
-          href="/dashboard"
-          className="flex items-baseline justify-center sm:justify-start gap-1.5 w-full rounded-sm"
+          href="/"
+          title="Back to Vizor"
+          className="flex items-center justify-center sm:justify-start gap-2 w-full rounded-sm"
         >
-          <span className="font-sans font-bold text-base tracking-tight">
-            V<span className="hidden sm:inline">izor</span>
-          </span>
-          <span className="hidden sm:inline text-[10px] uppercase tracking-[0.14em] text-ink-faint">
-            Advisor
+          <VizorMark className="h-8 shrink-0" />
+          <span className="hidden sm:flex items-baseline gap-1.5 min-w-0">
+            <span className="font-sans font-bold text-base tracking-tight">
+              Vizor
+            </span>
+            <span className="text-[10px] uppercase tracking-[0.14em] text-ink-faint">
+              Advisor
+            </span>
           </span>
         </Link>
       </div>
@@ -73,7 +82,7 @@ export function Sidebar({ advisorName }: { advisorName: string }) {
         })}
       </nav>
 
-      <div className="border-t border-rule p-2">
+      <div className="border-t border-rule p-2 space-y-1">
         <div className="flex items-center gap-2">
           <span
             className="w-7 h-7 shrink-0 rounded-full bg-ink text-paper-raised grid place-items-center text-[10px] font-semibold tracking-wide"
@@ -89,7 +98,10 @@ export function Sidebar({ advisorName }: { advisorName: string }) {
               Advisor
             </p>
           </div>
-          <form action={signOutAction} className="hidden sm:block">
+        </div>
+        <div className="flex items-center justify-center sm:justify-between gap-1">
+          <ThemeToggle />
+          <form action={signOutAction}>
             <SignOutButton />
           </form>
         </div>

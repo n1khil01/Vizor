@@ -4,17 +4,26 @@ import { useState, type FormEvent } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 
-export function LoginForm() {
+export function LoginForm({
+  role = "advisor",
+}: {
+  role?: "advisor" | "student";
+}) {
   const router = useRouter();
   const params = useSearchParams();
+  const wrongRoleError =
+    role === "advisor"
+      ? "That account isn't registered as an advisor."
+      : "That account isn't registered as a student.";
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(
-    params.get("error") === "not-an-advisor"
-      ? "That account isn't registered as an advisor."
+    params.get("error") === "not-an-advisor" || params.get("error") === "not-a-student"
+      ? wrongRoleError
       : null,
   );
   const [loading, setLoading] = useState(false);
+  const defaultNext = role === "student" ? "/portal" : "/dashboard";
 
   async function onSubmit(e: FormEvent) {
     e.preventDefault();
@@ -30,7 +39,7 @@ export function LoginForm() {
       setError(error.message);
       return;
     }
-    router.push(params.get("next") ?? "/dashboard");
+    router.push(params.get("next") ?? defaultNext);
     router.refresh();
   }
 

@@ -11,6 +11,15 @@ export async function signOutAction() {
   redirect("/login");
 }
 
+/** Same sign-out, routed back to the student login screen rather than the
+    advisor one, so a signed-out student lands somewhere that already makes
+    sense for them instead of the advisor email placeholder. */
+export async function signOutStudentAction() {
+  const supabase = await createClient();
+  await supabase.auth.signOut();
+  redirect("/login/student");
+}
+
 /** Every action reports back so the UI can show a real error instead of
     silently doing nothing. */
 export type ActionResult = { ok: true } | { ok: false; error: string };

@@ -18,7 +18,12 @@ export default async function DashboardLayout({
 
   const advisor = await getAdvisorProfile(supabase, user.id);
   if (!advisor) {
-    redirect("/login?error=not-an-advisor");
+    const { data: profile } = await supabase
+      .from("profiles")
+      .select("role")
+      .eq("auth_user_id", user.id)
+      .maybeSingle();
+    redirect(profile?.role === "student" ? "/portal" : "/login?error=not-an-advisor");
   }
 
   const [students, tickets] = await Promise.all([

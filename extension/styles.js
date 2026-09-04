@@ -39,8 +39,8 @@ const CSS_TEXT = `
 }
 
 /* ── Launcher ───────────────────────────────────────────────────────
-   A tile, not a circle: squared geometry with a gold rule that grows
-   on hover, so the affordance is felt rather than decorated. */
+   A circular badge with a gold ring that wraps fully around it on
+   hover, so the affordance is felt rather than decorated. */
 #bubble {
   position: fixed;
   bottom: 22px;
@@ -49,7 +49,7 @@ const CSS_TEXT = `
   height: 54px;
   padding: 0;
   border: none;
-  border-radius: 4px;
+  border-radius: 50%;
   background: var(--maroon);
   color: #fff;
   font-family: var(--serif);
@@ -62,21 +62,33 @@ const CSS_TEXT = `
   transition: transform 160ms var(--ease), box-shadow 160ms var(--ease);
   z-index: 2147483647;
 }
-#bubble::before {
-  content: "";
+#bubble-ring {
   position: absolute;
-  inset: 0 0 auto 0;
-  height: 3px;
-  background: var(--gold);
-  transform: scaleX(0.42);
-  transform-origin: left;
-  transition: transform 220ms var(--ease);
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+  pointer-events: none;
+}
+#bubble-ring circle {
+  fill: none;
+  stroke: var(--gold);
+  stroke-width: 3;
+  stroke-dasharray: 160.2;
+  stroke-dashoffset: 92.9;
+  transition: stroke-dashoffset 220ms var(--ease);
 }
 #bubble:hover { transform: translateY(-2px); box-shadow: 0 4px 8px rgba(23,18,15,0.2), 0 16px 34px rgba(23,18,15,0.26); }
-#bubble:hover::before { transform: scaleX(1); }
+#bubble:hover #bubble-ring circle { stroke-dashoffset: 0; }
 #bubble:active { transform: translateY(0); }
 #bubble.minimized { opacity: 0.92; }
 #bubble[hidden] { display: none; }
+#bubble-logo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 
 /* Unread advisor reply (phase 8 hook). */
 #bubble .dot {
@@ -126,7 +138,16 @@ const CSS_TEXT = `
   gap: 8px;
   flex-shrink: 0;
 }
-#wordmark { display: block; font-family: var(--serif); font-size: 19px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.1; }
+#wordmark-logo {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  object-fit: contain;
+  vertical-align: -9px;
+  margin-right: -2px;
+}
+#wordmark { display: inline; font-family: var(--serif); font-size: 19px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.1; }
 #kicker {
   display: block;
   margin-top: 3px;
@@ -521,6 +542,63 @@ const CSS_TEXT = `
 #send:hover { background: var(--maroon-deep); }
 #send:active { transform: translateY(1px); }
 #send:disabled { opacity: 0.4; cursor: default; transform: none; }
+
+#new-ticket {
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid var(--rule);
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 160ms var(--ease), border-color 160ms var(--ease);
+}
+#new-ticket:hover { background: var(--paper-raised, #f4efe8); border-color: var(--maroon); }
+
+#attach-label {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  font-size: 14px;
+  opacity: 0.75;
+}
+#attach-label:hover { opacity: 1; }
+
+#attachments {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 8px 16px 0;
+  background: var(--paper);
+}
+#attachments[hidden] { display: none; }
+.attachment-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  padding: 2px 8px;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  color: var(--ink);
+}
+.attachment-chip button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: var(--ink-faint, #999);
+  font-size: 12px;
+  line-height: 1;
+  padding: 0;
+}
 
 /* ── Focus & motion ─────────────────────────────────────────────── */
 :focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }

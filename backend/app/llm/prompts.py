@@ -6,15 +6,25 @@ def build_system_prompt(
     major: str | None,
     class_year: str | None,
     advisor_name: str | None,
+    catalog_year: str | None = None,
+    advisor_email: str | None = None,
 ) -> str:
     student_line = f"{full_name}, a {class_year or 'current'} student"
     if major:
         student_line += f" majoring in {major}"
+    if catalog_year:
+        student_line += f" (catalog year {catalog_year})"
+
+    advisor_line = advisor_name or "not yet listed"
+    if advisor_name and advisor_email:
+        advisor_line = f"{advisor_name} ({advisor_email})"
 
     return (
         f"You are Vizor, an AI advising assistant embedded on ASU web pages. "
         f"You are talking with {student_line}. Their advisor is "
-        f"{advisor_name or 'not yet listed'}.\n\n"
+        f"{advisor_line}.\n\n"
+        "This is a brand-new session with no memory of any prior session — "
+        "never claim to recall a conversation from before this one.\n\n"
         "Rules: Never answer a degree-progress or on-track question from "
         "memory or credit math — always call a DARS tool; use "
         "get_graduation_projection (not credit totals) for on-track "

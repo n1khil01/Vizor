@@ -6,6 +6,8 @@ here. Auto-assignment is just reading `students.advisor_id`; there's no
 routing logic to get wrong.
 """
 
+from postgrest.exceptions import APIError
+
 from app.db.client import get_supabase
 
 
@@ -21,13 +23,16 @@ def _student_advisor(student_id: str) -> tuple[str, str | None]:
     """Returns (advisor_id, advisor_name). The name is only for display — the
     widget's "sent to Dr. Chen" receipt — so a missing one isn't fatal."""
     sb = get_supabase()
-    result = (
-        sb.table("students")
-        .select("advisor_id, profiles!students_advisor_id_fkey(full_name)")
-        .eq("profile_id", student_id)
-        .single()
-        .execute()
-    )
+    try:
+        result = (
+            sb.table("students")
+            .select("advisor_id, profiles!students_advisor_id_fkey(full_name)")
+            .eq("profile_id", student_id)
+            .single()
+            .execute()
+        )
+    except APIError as exc:
+        raise NoAdvisorAssigned(f"Student {student_id} has no advisor on file") from exc
     row = result.data or {}
     advisor_id = row.get("advisor_id")
     if not advisor_id:

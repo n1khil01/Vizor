@@ -15,6 +15,10 @@ app.add_middleware(
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
+    # Chrome's Private Network Access policy blocks a public HTTPS page
+    # (e.g. ai.asu.edu) from fetching a loopback address like
+    # localhost:8000 unless the server opts in on the preflight.
+    allow_private_network=True,
 )
 
 app.include_router(auth.router)

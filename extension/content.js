@@ -26,12 +26,17 @@
     <style>${CSS_TEXT}</style>
     <div id="root">
       <button id="bubble" title="Open Vizor" aria-label="Open Vizor">
-        V<span class="dot" hidden></span>
+        <svg id="bubble-ring" viewBox="0 0 54 54" aria-hidden="true">
+          <circle cx="27" cy="27" r="25.5" />
+        </svg>
+        <img id="bubble-logo" alt="" src="${chrome.runtime.getURL("icons/logo.png")}" />
+        <span class="dot" hidden></span>
       </button>
 
       <section id="panel" role="dialog" aria-label="Vizor advising assistant" hidden>
         <header id="header">
           <h1 style="margin:0">
+            <img id="wordmark-logo" alt="" src="${chrome.runtime.getURL("icons/logo.png")}" />
             <span id="wordmark">Vizor</span>
             <span id="kicker">ASU Advising</span>
           </h1>
@@ -73,9 +78,14 @@
               <ul class="starters"></ul>
             </div>
           </div>
+          <div id="attachments" hidden></div>
           <div id="composer">
+            <button id="new-ticket" title="Open a ticket for your advisor" aria-label="Open a ticket for your advisor">+</button>
             <label class="sr-only" for="input">Message Vizor</label>
             <textarea id="input" rows="1" placeholder="Ask about your degree, a form, a deadline&hellip;"></textarea>
+            <label id="attach-label" title="Attach a file" aria-label="Attach a file">
+              📎<input id="file-input" type="file" accept=".txt,.md,.csv,.json,.log" multiple hidden />
+            </label>
             <button id="send">Send</button>
           </div>
         </div>
@@ -98,6 +108,15 @@
   let conversationId = null;
   let streaming = false;
   const bubbleDot = $("#bubble .dot");
+
+  // This session's turns only — never written to chrome.storage or any
+  // persistent store, and reset to [] whenever the widget reloads or the
+  // student logs out, so a new visit never carries prior-session context.
+  let sessionHistory = [];
+  let pendingAttachments = []; // [{filename, text}], cleared after each send
+  const attachmentsEl = $("#attachments");
+  const fileInput = $("#file-input");
+  const newTicketBtn = $("#new-ticket");
 
   // ── Chrome ────────────────────────────────────────────────────────
 
@@ -126,6 +145,9 @@
     await chrome.storage.local.remove(STORAGE_KEY);
     token = null;
     conversationId = null;
+    sessionHistory = [];
+    pendingAttachments = [];
+    renderAttachments();
     messagesEl.querySelectorAll(".msg, .memo").forEach((el) => el.remove());
     emptyEl.hidden = false;
     logoutBtn.hidden = true;
@@ -369,6 +391,9 @@
     const assistantEl = addMessage("assistant", "");
     assistantEl.classList.add("pending");
     let escalation = null;
+    const attachmentsForThisTurn = pendingAttachments;
+    pendingAttachments = [];
+    renderAttachments();
 
     try {
       const res = await fetch(`${VIZOR_API_BASE}/chat`, {
@@ -377,7 +402,12 @@
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ message: text, conversation_id: conversationId }),
+        body: JSON.stringify({
+          message: text,
+          conversation_id: conversationId,
+          history: sessionHistory,
+          attachments: attachmentsForThisTurn,
+        }),
       });
 
       if (res.status === 401) {
@@ -421,6 +451,11 @@
       }
 
       if (escalation) renderEscalation(escalation);
+
+      // Kept only in memory for the rest of this session — never sent
+      // anywhere for storage, and gone the moment the widget reloads.
+      sessionHistory.push({ role: "user", content: text });
+      sessionHistory.push({ role: "assistant", content: assistantEl.textContent });
     } catch (e) {
       assistantEl.classList.remove("pending");
       assistantEl.textContent = e.message || "Something went wrong.";
@@ -429,6 +464,125 @@
       setStreaming(false);
       inputEl.focus();
     }
+  }
+
+  // ── Attachments (students can supplement the assistant with a file) ─
+
+  function renderAttachments() {
+    attachmentsEl.innerHTML = "";
+    attachmentsEl.hidden = pendingAttachments.length === 0;
+    pendingAttachments.forEach((a, i) => {
+      const chip = document.createElement("span");
+      chip.className = "attachment-chip";
+      chip.appendChild(document.createTextNode(a.filename));
+      const remove = document.createElement("button");
+      remove.textContent = "×";
+      remove.title = `Remove ${a.filename}`;
+      remove.addEventListener("click", () => {
+        pendingAttachments.splice(i, 1);
+        renderAttachments();
+      });
+      chip.appendChild(remove);
+      attachmentsEl.appendChild(chip);
+    });
+  }
+
+  async function handleFileSelection(files) {
+    for (const file of Array.from(files)) {
+      if (file.size > 200_000) {
+        addNote(`${file.name} is too large to attach (200KB max).`);
+        continue;
+      }
+      const text = await file.text();
+      pendingAttachments.push({ filename: file.name, text });
+    }
+    renderAttachments();
+  }
+
+  // ── Direct ticket creation via the "+" button (no bot escalation) ──
+
+  function renderDirectTicketForm() {
+    emptyEl.hidden = true;
+    const memo = document.createElement("article");
+    memo.className = "memo";
+    memo.dataset.state = "draft";
+    memo.innerHTML = `
+      <div class="memo-head">
+        <span class="memo-kicker">New ticket for your advisor</span>
+        <span class="memo-stamp">Not sent</span>
+      </div>
+      <label class="field">
+        <span class="field-label">Subject</span>
+        <input class="memo-subject" type="text" placeholder="What's this about?" />
+      </label>
+      <label class="field">
+        <span class="field-label">Message</span>
+        <textarea class="memo-body" rows="5" placeholder="Describe what you need help with…"></textarea>
+      </label>
+      <div class="memo-actions">
+        <button class="btn-ghost memo-discard">Discard</button>
+        <button class="btn-primary memo-send">Send to advisor</button>
+      </div>
+      <p class="memo-receipt" hidden></p>
+    `;
+    const q = (sel) => memo.querySelector(sel);
+    const bodyEl = q(".memo-body");
+    messagesEl.appendChild(memo);
+    scrollToEnd();
+    bodyEl.focus();
+
+    q(".memo-discard").addEventListener("click", () => memo.remove());
+
+    q(".memo-send").addEventListener("click", async () => {
+      const subject = q(".memo-subject").value.trim();
+      const body = bodyEl.value.trim();
+      const errEl = q(".memo-receipt");
+      if (!body) {
+        errEl.hidden = false;
+        errEl.textContent = "Add a message before sending.";
+        return;
+      }
+      const sendEl = q(".memo-send");
+      sendEl.disabled = true;
+      sendEl.textContent = "Sending…";
+      errEl.hidden = true;
+      try {
+        const res = await fetch(`${VIZOR_API_BASE}/tickets`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            reason: "Student opened this ticket directly.",
+            summary: subject || "Student-initiated ticket",
+            category: "student-initiated",
+            draft_subject: subject || "Question for my advisor",
+            draft_body: body,
+            conversation_id: conversationId,
+          }),
+        });
+        if (!res.ok) throw new Error("Couldn't send that — try again in a moment.");
+        const ticket = await res.json();
+        memo.dataset.state = "sent";
+        q(".memo-kicker").textContent = "Sent to your advisor";
+        q(".memo-stamp").textContent = "Sent";
+        q(".memo-subject").readOnly = true;
+        bodyEl.readOnly = true;
+        q(".memo-actions").remove();
+        errEl.hidden = false;
+        errEl.textContent =
+          `Ticket ${String(ticket.id).slice(0, 8)} · opened ` +
+          `${new Date().toLocaleDateString(undefined, { month: "short", day: "numeric" })}` +
+          `${ticket.advisor_name ? ` · assigned to ${ticket.advisor_name}` : ""}`;
+        scrollToEnd();
+      } catch (e) {
+        sendEl.disabled = false;
+        sendEl.textContent = "Send to advisor";
+        errEl.hidden = false;
+        errEl.textContent = e.message || "Something went wrong.";
+      }
+    });
   }
 
   // ── Wiring ────────────────────────────────────────────────────────
@@ -455,6 +609,15 @@
   });
   $("#password").addEventListener("keydown", (e) => {
     if (e.key === "Enter") $("#login-btn").click();
+  });
+
+  newTicketBtn.addEventListener("click", () => {
+    if (!token) return;
+    renderDirectTicketForm();
+  });
+  fileInput.addEventListener("change", (e) => {
+    if (e.target.files && e.target.files.length) handleFileSelection(e.target.files);
+    fileInput.value = "";
   });
 
   sendBtn.addEventListener("click", () => sendMessage(inputEl.value));

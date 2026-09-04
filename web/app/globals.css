@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  /* ── Ground ───────────────────────────────────────────────────────────── */
+  /* ── Ground (light) ──────────────────────────────────────────────────── */
   --color-paper: #f6f2e9;
   --color-paper-raised: #fbf9f3;
   --color-paper-sunk: #efe9dc;
@@ -11,7 +11,7 @@
   --color-rule: #ddd4bd;
   --color-rule-strong: #b9ac83;
 
-  /* ── The three load-bearing state colors ──────────────────────────────────
+  /* ── The three load-bearing state colors (light) ─────────────────────────
      Never decorative outside status. Each state ships three tokens:
        -mark  the filled dot / non-text UI mark  (>= 3.0:1 on paper)
        -ink   the text tone for that state       (>= 4.5:1 on paper)
@@ -35,6 +35,60 @@
   /* The ledger's baseline rhythm. One number, referenced by the ruled
      ground and by the shell's row heights so lines and text agree. */
   --rhythm: 32px;
+
+  color-scheme: light;
+}
+
+/* ── Dark ledger ─────────────────────────────────────────────────────────
+   Not an inverted light mode: a night ledger, deep layered warm neutrals
+   (never pure #000) with the same three state colors re-tuned to clear
+   4.5:1 text / 3:1 mark against the dark paper-raised surface. `ink` still
+   plays both roles — primary text and the "you resolved" state — it just
+   flips from near-black to a warm cream, so the state grammar's own logic
+   ("ink is the system's ink") holds in both themes.
+
+   Two ways in: the OS preference (unset data-theme), or an explicit
+   data-theme="dark"/"light" from the toggle, which always wins. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-paper: #18160f;
+    --color-paper-raised: #211e15;
+    --color-paper-sunk: #100f0a;
+    --color-paper-hover: #28241a;
+    --color-rule: #3b3627;
+    --color-rule-strong: #6b6446;
+
+    --color-maroon: #e0577e;
+    --color-maroon-ink: #f0a3ba;
+    --color-gold: #ffc627;
+    --color-gold-mark: #ffc627;
+    --color-gold-ink: #ffd873;
+    --color-ink: #f2ede0;
+    --color-ink-soft: #c9c0a4;
+    --color-ink-faint: #9c957a;
+
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --color-paper: #18160f;
+  --color-paper-raised: #211e15;
+  --color-paper-sunk: #100f0a;
+  --color-paper-hover: #28241a;
+  --color-rule: #3b3627;
+  --color-rule-strong: #6b6446;
+
+  --color-maroon: #e0577e;
+  --color-maroon-ink: #f0a3ba;
+  --color-gold: #ffc627;
+  --color-gold-mark: #ffc627;
+  --color-gold-ink: #ffd873;
+  --color-ink: #f2ede0;
+  --color-ink-soft: #c9c0a4;
+  --color-ink-faint: #9c957a;
+
+  color-scheme: dark;
 }
 
 @theme inline {
@@ -59,6 +113,7 @@
 body {
   background-color: var(--color-paper);
   color: var(--color-ink);
+  transition: background-color 150ms ease-out, color 150ms ease-out;
 }
 
 /* The ruled ground is opt-in, not global. It belongs to surfaces that read as

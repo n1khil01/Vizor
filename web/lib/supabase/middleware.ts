@@ -1,7 +1,7 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
-const PUBLIC_PATHS = ["/", "/login"];
+const PUBLIC_PATHS = ["/", "/login", "/login/student"];
 
 export async function updateSession(request: NextRequest) {
   let response = NextResponse.next({ request });
@@ -41,6 +41,9 @@ export async function updateSession(request: NextRequest) {
 
   if (user && request.nextUrl.pathname === "/login") {
     return NextResponse.redirect(new URL("/dashboard", request.url));
+  }
+  if (user && request.nextUrl.pathname === "/login/student") {
+    return NextResponse.redirect(new URL("/portal", request.url));
   }
 
   return response;

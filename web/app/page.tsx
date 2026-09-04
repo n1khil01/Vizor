@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { StateDot, STATE_META, STATE_ORDER } from "@/components/StateDot";
+import { VizorMark } from "@/components/VizorMark";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 /** Illustrative only — deliberately not real student records. */
 const EXAMPLES = [
@@ -28,20 +30,26 @@ export default function LandingPage() {
     <main className="ruled">
       <header className="border-b border-rule">
         <div className="px-6 sm:px-10 h-14 flex items-center justify-between max-w-6xl mx-auto w-full">
-          <span className="flex items-baseline gap-2">
-            <span className="font-sans font-bold text-base tracking-tight">
-              Vizor
-            </span>
-            <span className="text-[10px] uppercase tracking-[0.14em] text-ink-faint">
-              for Advisors
+          <span className="flex items-center gap-2">
+            <VizorMark className="h-8" />
+            <span className="flex items-baseline gap-2">
+              <span className="font-sans font-bold text-base tracking-tight">
+                Vizor
+              </span>
+              <span className="text-[10px] uppercase tracking-[0.14em] text-ink-faint">
+                for Advisors
+              </span>
             </span>
           </span>
-          <Link
-            href="/login"
-            className="text-sm font-medium border border-ink rounded-md px-3.5 py-1.5 transition-colors duration-150 ease-out hover:bg-ink hover:text-paper-raised active:scale-[0.98]"
-          >
-            Sign in
-          </Link>
+          <div className="flex items-center gap-2">
+            <ThemeToggle />
+            <Link
+              href="/login"
+              className="text-sm font-medium border border-ink rounded-md px-3.5 py-1.5 transition-colors duration-150 ease-out hover:bg-ink hover:text-paper-raised active:scale-[0.98]"
+            >
+              Sign in
+            </Link>
+          </div>
         </div>
       </header>
 
@@ -67,12 +75,20 @@ export default function LandingPage() {
             you, their advisor, only what actually needs a human, with the
             student&rsquo;s context already assembled.
           </p>
-          <Link
-            href="/login"
-            className="inline-flex items-center rounded-md bg-ink text-paper-raised px-5 py-2.5 text-sm font-medium mt-7 transition-colors duration-150 ease-out hover:bg-ink/90 active:scale-[0.98]"
-          >
-            Sign in as an advisor
-          </Link>
+          <div className="flex flex-wrap items-center gap-3 mt-7">
+            <Link
+              href="/login"
+              className="inline-flex items-center rounded-md bg-ink text-paper-raised px-5 py-2.5 text-sm font-medium transition-colors duration-150 ease-out hover:bg-ink/90 active:scale-[0.98]"
+            >
+              Sign in as an advisor
+            </Link>
+            <Link
+              href="/login/student"
+              className="inline-flex items-center rounded-md border border-ink px-5 py-2.5 text-sm font-medium transition-colors duration-150 ease-out hover:bg-ink hover:text-paper-raised active:scale-[0.98]"
+            >
+              Sign in as a student
+            </Link>
+          </div>
         </div>
 
         <div className="lg:pt-4">

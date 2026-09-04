@@ -1,21 +1,18 @@
 import { Suspense } from "react";
 import Link from "next/link";
-import { LoginForm, LoginFormSkeleton } from "./LoginForm";
+import { LoginForm, LoginFormSkeleton } from "../LoginForm";
 import { VizorMark } from "@/components/VizorMark";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { ChevronLeftIcon } from "@/components/icons";
 
-export const metadata = { title: "Sign in — Vizor" };
+export const metadata = { title: "Student sign in — Vizor" };
 
-export default function LoginPage() {
+export default function StudentLoginPage() {
   return (
-    /* No ruled ground under the form: a centred card floating on ruled paper
-       reads as an accident. The ledger begins once you're inside it. */
     <main className="min-h-dvh grid lg:grid-cols-2">
       <div className="flex items-center justify-center px-6 py-16 relative">
-        {/* Pinned to the page corner, not the centred form column — the same
-            treatment as ThemeToggle opposite it, so both read as fixed
-            chrome rather than part of the sign-in card. */}
+        {/* Pinned to the page corner, not the centred form column — mirrors
+            the advisor sign-in page and ThemeToggle opposite it. */}
         <Link
           href="/"
           title="Back to Vizor"
@@ -27,7 +24,7 @@ export default function LoginPage() {
               Vizor
             </span>
             <span className="text-[10px] uppercase tracking-[0.14em] text-ink-faint">
-              Advisor
+              Student
             </span>
           </span>
         </Link>
@@ -44,16 +41,16 @@ export default function LoginPage() {
 
           <h1 className="font-serif text-2xl">Sign in</h1>
           <p className="text-sm text-ink-soft mt-1 mb-7">
-            Your advising caseload, one ledger.
+            Track your tickets and advising history.
           </p>
 
           <Suspense fallback={<LoginFormSkeleton />}>
-            <LoginForm role="advisor" />
+            <LoginForm role="student" />
           </Suspense>
 
           <p className="text-sm text-ink-faint mt-6">
-            Student?{" "}
-            <Link href="/login/student" className="underline hover:text-ink">
+            Advisor?{" "}
+            <Link href="/login" className="underline hover:text-ink">
               Sign in here
             </Link>
             .
@@ -61,17 +58,15 @@ export default function LoginPage() {
         </div>
       </div>
 
-      {/* The ruled ground appears here as a preview of the surface you're
-          signing in to, rather than as wallpaper behind the form. */}
       <aside className="ruled hidden lg:flex items-center justify-center border-l border-rule px-10">
         <blockquote className="max-w-sm">
           <p className="font-serif text-2xl leading-snug text-balance">
-            Every ticket arrives{" "}
-            <span className="italic">already understood.</span>
+            Every ticket you send,{" "}
+            <span className="italic">tracked in one place.</span>
           </p>
           <p className="text-sm text-ink-soft mt-3 leading-relaxed">
-            Session context, escalation reason, and the student&rsquo;s DARS
-            audit are attached before you open it.
+            See what&rsquo;s still in progress and what your advisor has
+            already resolved.
           </p>
         </blockquote>
       </aside>

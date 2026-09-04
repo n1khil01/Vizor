@@ -26,6 +26,54 @@ export interface TicketWithStudent extends TicketRow {
   student: StudentWithProfile | null;
 }
 
+export async function getStudentProfile(
+  supabase: DB,
+  authUserId: string,
+): Promise<StudentWithProfile | null> {
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("*")
+    .eq("auth_user_id", authUserId)
+    .eq("role", "student")
+    .maybeSingle();
+  if (!profile) return null;
+
+  const { data: student } = await supabase
+    .from("students")
+    .select("*")
+    .eq("profile_id", profile.id)
+    .maybeSingle();
+  if (!student) return null;
+
+  return { ...student, profile };
+}
+
+export async function getMyTickets(
+  supabase: DB,
+  studentId: string,
+): Promise<TicketRow[]> {
+  const { data } = await supabase
+    .from("tickets")
+    .select("*")
+    .eq("student_id", studentId)
+    .order("created_at", { ascending: false });
+  return data ?? [];
+}
+
+export async function getMyTicket(
+  supabase: DB,
+  studentId: string,
+  ticketId: string,
+): Promise<TicketRow | null> {
+  const { data } = await supabase
+    .from("tickets")
+    .select("*")
+    .eq("id", ticketId)
+    .eq("student_id", studentId)
+    .maybeSingle();
+  return data ?? null;
+}
+
 export async function getAdvisorProfile(
   supabase: DB,
   authUserId: string,

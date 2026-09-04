@@ -1,8 +1,15 @@
 """POST /chat (docs/PROJECT_PLAN.md §4.1, §8, §10 phase 4).
 
-Loads the student's record into the system prompt, replays the
-conversation's history, runs the tool loop, persists every turn, and
-streams the assistant's final answer back as SSE.
+Loads the student's record into the system prompt, runs the tool loop over
+the turns the client hands back with this request, and streams the
+assistant's final answer back as SSE.
+
+Each visit is an independent session: the client is the only place this
+turn's history lives (see extension/content.js), nothing here reads or
+writes a persisted transcript, and a `conversation_id` is never reused
+across a fresh page load. `conversations` rows still exist purely as an
+opaque handle tickets can point to for routing — they hold no message
+content.
 """
 
 import json
@@ -26,16 +33,33 @@ from app.config import get_settings
 router = APIRouter(tags=["chat"])
 
 
+class HistoryTurn(BaseModel):
+    role: str
+    content: str
+
+
+class Attachment(BaseModel):
+    filename: str
+    text: str
+
+
 class ChatRequest(BaseModel):
     message: str
     conversation_id: str | None = None
+    # Held by the extension for the life of this session only — never read
+    # back from any server-side store, so a new visit starts with `[]`.
+    history: list[HistoryTurn] = []
+    attachments: list[Attachment] = []
 
 
 def _load_student(user: CurrentUser) -> dict:
     sb = get_supabase()
     result = (
         sb.table("students")
-        .select("profile_id, class_year, major, advisor_id, profiles!students_advisor_id_fkey(full_name)")
+        .select(
+            "profile_id, class_year, major, advisor_id, "
+            "profiles!students_advisor_id_fkey(full_name, email)"
+        )
         .eq("profile_id", user.profile_id)
         .single()
         .execute()
@@ -45,7 +69,24 @@ def _load_student(user: CurrentUser) -> dict:
     return result.data
 
 
+def _load_catalog_year(student_id: str) -> str | None:
+    sb = get_supabase()
+    result = (
+        sb.table("dars_reports")
+        .select("catalog_year")
+        .eq("student_id", student_id)
+        .order("prepared_on", desc=True)
+        .limit(1)
+        .execute()
+    )
+    rows = result.data or []
+    return rows[0]["catalog_year"] if rows else None
+
+
 def _get_or_create_conversation(student_id: str, conversation_id: str | None) -> str:
+    """Just an id for tickets to point at — created fresh every session
+    (the extension never persists `conversation_id` across a reload), and
+    never used to look up message history."""
     sb = get_supabase()
     if conversation_id:
         existing = (
@@ -62,53 +103,6 @@ def _get_or_create_conversation(student_id: str, conversation_id: str | None) ->
 
     created = sb.table("conversations").insert({"student_id": student_id}).execute()
     return created.data[0]["id"]
-
-
-def _load_history(conversation_id: str) -> list[dict]:
-    sb = get_supabase()
-    result = (
-        sb.table("messages")
-        .select("role, content, tool_calls")
-        .eq("conversation_id", conversation_id)
-        .order("created_at")
-        .execute()
-    )
-    history = []
-    for row in result.data or []:
-        entry: dict = {"role": row["role"], "content": row["content"]}
-        if row["role"] == "tool" and row.get("tool_calls"):
-            entry["tool_call_id"] = row["tool_calls"]["tool_call_id"]
-        elif row.get("tool_calls"):
-            entry["tool_calls"] = row["tool_calls"]
-        history.append(entry)
-    return history
-
-
-def _persist_new_turns(conversation_id: str, new_messages: list[dict]) -> None:
-    sb = get_supabase()
-    rows = []
-    for msg in new_messages:
-        if msg["role"] == "tool":
-            rows.append(
-                {
-                    "conversation_id": conversation_id,
-                    "role": "tool",
-                    "content": msg["content"],
-                    "tool_calls": {"tool_call_id": msg["tool_call_id"]},
-                }
-            )
-        else:
-            row = {
-                "conversation_id": conversation_id,
-                "role": msg["role"],
-                "content": msg.get("content"),
-            }
-            if msg.get("tool_calls"):
-                row["tool_calls"] = msg["tool_calls"]
-            rows.append(row)
-    if rows:
-        sb.table("messages").insert(rows).execute()
-    sb.table("conversations").update({"last_message_at": "now()"}).eq("id", conversation_id).execute()
 
 
 def _find_escalation_draft(new_turns: list[dict]) -> dict | None:
@@ -132,21 +126,48 @@ def _find_escalation_draft(new_turns: list[dict]) -> dict | None:
     return None
 
 
+def _attachments_context(attachments: list[Attachment]) -> str | None:
+    if not attachments:
+        return None
+    parts = [
+        f"--- {a.filename} ---\n{a.text.strip()[:8000]}" for a in attachments if a.text.strip()
+    ]
+    if not parts:
+        return None
+    return (
+        "The student attached the following file(s) this session to supplement "
+        "their question. Use them as additional context; they are not stored "
+        "anywhere and won't be available in a future session.\n\n" + "\n\n".join(parts)
+    )
+
+
 @router.post("/chat")
 def chat(body: ChatRequest, user: CurrentUser = Depends(require_student)) -> StreamingResponse:
     student = _load_student(user)
-    advisor_name = (student.get("profiles") or {}).get("full_name")
+    advisor_profile = student.get("profiles") or {}
+    advisor_name = advisor_profile.get("full_name")
+    advisor_email = advisor_profile.get("email")
+    catalog_year = _load_catalog_year(student["profile_id"])
 
     conversation_id = _get_or_create_conversation(student["profile_id"], body.conversation_id)
-    history = _load_history(conversation_id)
 
     system_prompt = build_system_prompt(
         full_name=user.full_name,
         major=student.get("major"),
         class_year=student.get("class_year"),
+        catalog_year=catalog_year,
         advisor_name=advisor_name,
+        advisor_email=advisor_email,
     )
 
+    attachments_note = _attachments_context(body.attachments)
+    if attachments_note:
+        system_prompt = f"{system_prompt}\n\n{attachments_note}"
+
+    # `body.history` is exactly what this session has said so far and
+    # nothing else — the client, not this endpoint, is the only place it's
+    # held, so a fresh visit always starts from an empty list.
+    history = [{"role": t.role, "content": t.content} for t in body.history]
     messages = [{"role": "system", "content": system_prompt}, *history, {"role": "user", "content": body.message}]
     turn_start = len(messages) - 1  # everything from the new user message onward is new
 
@@ -164,7 +185,15 @@ def chat(body: ChatRequest, user: CurrentUser = Depends(require_student)) -> Str
     run_tool_loop(client, settings.asu_chat_model, student["profile_id"], messages, forced_tool)
 
     new_turns = messages[turn_start:]
-    _persist_new_turns(conversation_id, new_turns)
+
+    # No transcript write here, deliberately: session history is never
+    # persisted to the database (product requirement — see extension's "new
+    # independent session" contract). Only `last_message_at` is touched, and
+    # only to keep the conversation row (routing handle for tickets) from
+    # looking stale.
+    get_supabase().table("conversations").update({"last_message_at": "now()"}).eq(
+        "id", conversation_id
+    ).execute()
 
     final_answer = new_turns[-1]["content"] or ""
     escalation = _find_escalation_draft(new_turns)
