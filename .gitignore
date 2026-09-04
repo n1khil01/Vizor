@@ -15,7 +15,13 @@
 
 # next.js
 /.next/
+**/.next/
 /out/
+
+# python
+__pycache__/
+**/__pycache__/
+*.pyc
 
 # production
 /build
