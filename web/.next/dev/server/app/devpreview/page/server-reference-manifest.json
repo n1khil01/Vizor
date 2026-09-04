@@ -1,0 +1,38 @@
+{
+  "node": {
+    "60433967db86c9ca3a57139123a49953dcf531aae9": {
+      "workers": {
+        "app/devpreview/page": {
+          "moduleId": "[project]/.next-internal/server/app/devpreview/page/actions.js { ACTIONS_MODULE0 => \"[project]/lib/actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "codeHash": null
+        }
+      },
+      "exportedName": "replyToTicketAction",
+      "filename": "lib/actions.ts"
+    },
+    "40d88b97bff543f32de1bbbcf0b596ac23e980f29c": {
+      "workers": {
+        "app/devpreview/page": {
+          "moduleId": "[project]/.next-internal/server/app/devpreview/page/actions.js { ACTIONS_MODULE0 => \"[project]/lib/actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "codeHash": null
+        }
+      },
+      "exportedName": "hardResolveTicketAction",
+      "filename": "lib/actions.ts"
+    },
+    "0083dc0b96f6c7334fd423f6665dda7766474aa838": {
+      "workers": {
+        "app/devpreview/page": {
+          "moduleId": "[project]/.next-internal/server/app/devpreview/page/actions.js { ACTIONS_MODULE0 => \"[project]/lib/actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "codeHash": null
+        }
+      },
+      "exportedName": "signOutAction",
+      "filename": "lib/actions.ts"
+    }
+  },
+  "edge": {}
+}

@@ -1,0 +1,16 @@
+{
+  "/(dashboard)/dashboard/page": "/dashboard",
+  "/(dashboard)/reports/[id]/page": "/reports/[id]",
+  "/(dashboard)/reports/page": "/reports",
+  "/(dashboard)/sessions/[id]/page": "/sessions/[id]",
+  "/(dashboard)/sessions/page": "/sessions",
+  "/(dashboard)/students/[id]/page": "/students/[id]",
+  "/(dashboard)/students/page": "/students",
+  "/(dashboard)/tickets/[id]/page": "/tickets/[id]",
+  "/(dashboard)/tickets/page": "/tickets",
+  "/_global-error/page": "/_global-error",
+  "/_not-found/page": "/_not-found",
+  "/favicon.ico/route": "/favicon.ico",
+  "/login/page": "/login",
+  "/page": "/"
+}

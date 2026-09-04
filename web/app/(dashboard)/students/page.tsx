@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { getAdvisorProfile, getAdvisorStudents, getAdvisorTickets } from "@/lib/data";
 import { CaseloadStrip } from "@/components/CaseloadStrip";
+import { PageHeader } from "@/components/PageHeader";
 
 export const metadata = { title: "Students — Vizor" };
 
@@ -16,13 +17,26 @@ export default async function StudentsPage() {
     getAdvisorTickets(supabase, advisor.id),
   ]);
 
+  const withOpen = students.filter((s) =>
+    tickets.some((t) => t.student_id === s.profile_id && t.status === "open"),
+  ).length;
+
   return (
-    <main className="px-8 py-8 max-w-5xl">
-      <header className="mb-8">
-        <h1 className="font-serif text-3xl">Students</h1>
-        <p className="text-ink-soft mt-1.5">Your assigned caseload.</p>
-      </header>
-      <CaseloadStrip students={students} tickets={tickets} />
-    </main>
+    <>
+      <PageHeader
+        title="Students"
+        meta={
+          <>
+            {students.length} assigned ·{" "}
+            <span className={withOpen > 0 ? "text-maroon-ink font-medium" : ""}>
+              {withOpen} with open tickets
+            </span>
+          </>
+        }
+      />
+      <div className="px-6 py-5">
+        <CaseloadStrip students={students} tickets={tickets} />
+      </div>
+    </>
   );
 }

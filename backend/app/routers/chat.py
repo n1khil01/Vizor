@@ -16,6 +16,9 @@ from app.auth import CurrentUser, require_student
 from app.db.client import get_supabase
 from app.llm.client import get_llm_client
 from app.llm.prompts import build_system_prompt
+from app.kb.tools import NAME as KB_TOOL_NAME
+from app.llm.escalation_intent import wants_advisor_escalation
+from app.llm.kb_intent import wants_policy_lookup
 from app.llm.tool_loop import run_tool_loop, stream_words
 from app.tickets.tools import NAME as ESCALATE_TOOL_NAME
 from app.config import get_settings
@@ -149,7 +152,16 @@ def chat(body: ChatRequest, user: CurrentUser = Depends(require_student)) -> Str
 
     settings = get_settings()
     client = get_llm_client()
-    run_tool_loop(client, settings.asu_chat_model, student["profile_id"], messages)
+    # Advisor intent wins if both match ("email my advisor about withdrawing") —
+    # reaching a person is the stronger ask. See app/llm/*_intent.py.
+    forced_tool = (
+        ESCALATE_TOOL_NAME
+        if wants_advisor_escalation(body.message)
+        else KB_TOOL_NAME
+        if wants_policy_lookup(body.message)
+        else None
+    )
+    run_tool_loop(client, settings.asu_chat_model, student["profile_id"], messages, forced_tool)
 
     new_turns = messages[turn_start:]
     _persist_new_turns(conversation_id, new_turns)

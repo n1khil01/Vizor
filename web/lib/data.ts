@@ -129,6 +129,21 @@ export async function getTicketMessages(
   return data ?? [];
 }
 
+export async function sendTicketMessage(
+  supabase: DB,
+  ticketId: string,
+  sender: "student" | "advisor",
+  body: string,
+  subject: string | null = null,
+): Promise<void> {
+  await supabase.from("ticket_messages").insert({
+    ticket_id: ticketId,
+    sender,
+    subject,
+    body,
+  });
+}
+
 export async function resolveTicket(
   supabase: DB,
   ticketId: string,

@@ -51,3 +51,13 @@ def send_ticket(body: SendTicketRequest, user: CurrentUser = Depends(require_stu
         )
     except service.NoAdvisorAssigned as exc:
         raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail=str(exc)) from exc
+
+
+@router.post("/{ticket_id}/resolve")
+def resolve_ticket(ticket_id: str, user: CurrentUser = Depends(require_student)) -> dict:
+    """Student-side resolve — always soft (§4.5). The advisor's hard resolve
+    lives entirely in the web app, which talks to Supabase directly."""
+    try:
+        return service.resolve_ticket_as_student(user.profile_id, ticket_id)
+    except service.TicketNotFound as exc:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(exc)) from exc

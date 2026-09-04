@@ -29,7 +29,9 @@ export default async function DashboardLayout({
   return (
     <div className="flex min-h-dvh">
       <Sidebar advisorName={advisor.full_name} />
-      <div className="flex-1 min-w-0">{children}</div>
+      {/* `ruled` lives on the content column only: the writing surface is the
+          page you work on, not the chrome around it. */}
+      <div className="ruled flex-1 min-w-0">{children}</div>
       <RightRail students={students} tickets={tickets} />
     </div>
   );

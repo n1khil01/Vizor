@@ -112,4 +112,66 @@ def get_ticket(student_id: str, ticket_id: str) -> dict:
         .order("created_at")
         .execute()
     )
+    mark_advisor_messages_read(ticket_id)
     return {**ticket.data, "messages": messages.data or []}
+
+
+def mark_advisor_messages_read(ticket_id: str) -> None:
+    """Called whenever the student actually views a ticket — via the widget's
+    ticket list/detail or the `get_ticket` chat tool (docs/PROJECT_PLAN.md
+    §4.4). Advisor replies are what §4.4's unread card cares about; the
+    student's own messages are never "unread" from their perspective."""
+    sb = get_supabase()
+    sb.table("ticket_messages").update({"read_at": "now()"}).eq("ticket_id", ticket_id).eq(
+        "sender", "advisor"
+    ).is_("read_at", "null").execute()
+
+
+def resolve_ticket_as_student(student_id: str, ticket_id: str) -> dict:
+    """Soft resolve (docs/PROJECT_PLAN.md §4.5): hidden from the advisor
+    queue and out of default bot context, but recoverable — unlike an
+    advisor's hard resolve, this never deletes the ticket from existence."""
+    sb = get_supabase()
+    existing = (
+        sb.table("tickets")
+        .select("id, status")
+        .eq("id", ticket_id)
+        .eq("student_id", student_id)
+        .maybe_single()
+        .execute()
+    )
+    if not existing or not existing.data:
+        raise TicketNotFound(f"No ticket {ticket_id} for student {student_id}")
+
+    updated = (
+        sb.table("tickets")
+        .update(
+            {
+                "status": "resolved",
+                "resolution": "soft",
+                "resolved_by": student_id,
+                "resolved_at": "now()",
+            }
+        )
+        .eq("id", ticket_id)
+        .execute()
+    )
+    return updated.data[0]
+
+
+def list_unread_advisor_replies(student_id: str) -> list[dict]:
+    """Powers the widget's proactive "Reply from your advisor" card and icon
+    badge (§4.4) — the one case where ticket content is surfaced without the
+    student asking, because otherwise a reply could go unnoticed for a
+    session or more."""
+    sb = get_supabase()
+    result = (
+        sb.table("ticket_messages")
+        .select("id, ticket_id, subject, body, created_at, tickets!inner(student_id)")
+        .eq("sender", "advisor")
+        .is_("read_at", "null")
+        .eq("tickets.student_id", student_id)
+        .order("created_at", desc=True)
+        .execute()
+    )
+    return [{k: v for k, v in row.items() if k != "tickets"} for row in (result.data or [])]

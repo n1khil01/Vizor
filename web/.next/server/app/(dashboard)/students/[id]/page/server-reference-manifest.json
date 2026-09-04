@@ -1,0 +1,16 @@
+{
+  "node": {
+    "00c348b84a39549edc79bf667b8db3ec95063443b0": {
+      "workers": {
+        "app/(dashboard)/students/[id]/page": {
+          "moduleId": 67896,
+          "async": false,
+          "codeHash": null
+        }
+      },
+      "exportedName": "signOutAction",
+      "filename": "lib/actions.ts"
+    }
+  },
+  "edge": {}
+}

@@ -2,11 +2,13 @@
 
 from app.kb import service
 
+NAME = "search_policy_kb"
+
 TOOL_DEFS = [
     {
         "type": "function",
         "function": {
-            "name": "search_policy_kb",
+            "name": NAME,
             "description": (
                 "Semantic search over ASU policy, procedure, and directory content "
                 "(clubs, internships, research/4+1 programs, how-to guides for forms "
@@ -31,7 +33,7 @@ TOOL_DEFS = [
 ]
 
 _DISPATCH = {
-    "search_policy_kb": service.search_policy_kb,
+    NAME: service.search_policy_kb,
 }
 
 

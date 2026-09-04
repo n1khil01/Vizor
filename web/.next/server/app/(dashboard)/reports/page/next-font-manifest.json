@@ -1,0 +1,12 @@
+{
+  "pages": {},
+  "app": {
+    "[project]/app/(dashboard)/reports/page": [
+      "static/media/75affa71d1e2f6a7-s.p.17-aodiw50953.woff2",
+      "static/media/ea3421846039b7f3-s.p.23jyvdx2mwxjn.woff2",
+      "static/media/68d403cf9f2c68c5-s.p.20at88_q9f_kt.woff2"
+    ]
+  },
+  "appUsingSizeAdjust": true,
+  "pagesUsingSizeAdjust": false
+}

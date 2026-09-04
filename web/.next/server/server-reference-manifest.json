@@ -1,0 +1,79 @@
+{
+  "node": {
+    "00c348b84a39549edc79bf667b8db3ec95063443b0": {
+      "workers": {
+        "app/(dashboard)/dashboard/page": {
+          "moduleId": 89087,
+          "async": false,
+          "codeHash": null
+        },
+        "app/(dashboard)/reports/[id]/page": {
+          "moduleId": 96562,
+          "async": false,
+          "codeHash": null
+        },
+        "app/(dashboard)/reports/page": {
+          "moduleId": 98682,
+          "async": false,
+          "codeHash": null
+        },
+        "app/(dashboard)/sessions/[id]/page": {
+          "moduleId": 52730,
+          "async": false,
+          "codeHash": null
+        },
+        "app/(dashboard)/sessions/page": {
+          "moduleId": 89607,
+          "async": false,
+          "codeHash": null
+        },
+        "app/(dashboard)/students/[id]/page": {
+          "moduleId": 67896,
+          "async": false,
+          "codeHash": null
+        },
+        "app/(dashboard)/students/page": {
+          "moduleId": 98593,
+          "async": false,
+          "codeHash": null
+        },
+        "app/(dashboard)/tickets/[id]/page": {
+          "moduleId": 73217,
+          "async": false,
+          "codeHash": null
+        },
+        "app/(dashboard)/tickets/page": {
+          "moduleId": 31605,
+          "async": false,
+          "codeHash": null
+        }
+      },
+      "filename": "lib/actions.ts",
+      "exportedName": "signOutAction"
+    },
+    "401d55dcf8165866ce68c804113fff53de9240b8c6": {
+      "workers": {
+        "app/(dashboard)/tickets/[id]/page": {
+          "moduleId": 73217,
+          "async": false,
+          "codeHash": null
+        }
+      },
+      "filename": "lib/actions.ts",
+      "exportedName": "hardResolveTicketAction"
+    },
+    "6078932b9c0a5e89e77e6b72a709884e56bb86abcb": {
+      "workers": {
+        "app/(dashboard)/tickets/[id]/page": {
+          "moduleId": 73217,
+          "async": false,
+          "codeHash": null
+        }
+      },
+      "filename": "lib/actions.ts",
+      "exportedName": "replyToTicketAction"
+    }
+  },
+  "edge": {},
+  "encryptionKey": "8BI4Kx/V+mHZoPAlV5+Deo3trxKoDWKJDQBo+eSiZEQ="
+}

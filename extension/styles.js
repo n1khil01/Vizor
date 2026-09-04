@@ -421,6 +421,13 @@ const CSS_TEXT = `
   color: var(--ink-soft);
   margin-bottom: 4px;
 }
+.memo-body-text {
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: var(--ink);
+  white-space: pre-line;
+  margin: 0 0 11px;
+}
 
 .memo .field { margin-bottom: 10px; }
 .memo input, .memo textarea {

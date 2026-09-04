@@ -1,35 +1,53 @@
 @import "tailwindcss";
 
 :root {
-  /* Ground */
+  /* ── Ground ───────────────────────────────────────────────────────────── */
   --color-paper: #f6f2e9;
   --color-paper-raised: #fbf9f3;
+  --color-paper-sunk: #efe9dc;
+  /* rule/25 flattened over paper-raised — the opaque equivalent of a row
+     hover, needed by sticky table cells that can't show what's behind them. */
+  --color-paper-hover: #f4f0e6;
   --color-rule: #ddd4bd;
   --color-rule-strong: #b9ac83;
 
-  /* The three load-bearing state colors. Never decorative outside status. */
+  /* ── The three load-bearing state colors ──────────────────────────────────
+     Never decorative outside status. Each state ships three tokens:
+       -mark  the filled dot / non-text UI mark  (>= 3.0:1 on paper)
+       -ink   the text tone for that state       (>= 4.5:1 on paper)
+       -band  the large flooded fill             (landing legend only)
+     Gold splits mark from band because #ffc627 sits at 1.5:1 on paper — it
+     works flooded under ink text, and is invisible as a 10px dot. */
   --color-maroon: #8c1d40;
   --color-maroon-ink: #5c1129;
   --color-gold: #ffc627;
+  --color-gold-mark: #b37f00;
   --color-gold-ink: #7a5b00;
   --color-ink: #17140d;
   --color-ink-soft: #4a4536;
-  --color-ink-faint: #837c65;
+  --color-ink-faint: #6e6752;
 
   --font-sans: var(--font-archivo), "Archivo", ui-sans-serif, system-ui,
     sans-serif;
   --font-serif: var(--font-source-serif), "Source Serif 4", ui-serif,
     Georgia, serif;
+
+  /* The ledger's baseline rhythm. One number, referenced by the ruled
+     ground and by the shell's row heights so lines and text agree. */
+  --rhythm: 32px;
 }
 
 @theme inline {
   --color-paper: var(--color-paper);
   --color-paper-raised: var(--color-paper-raised);
+  --color-paper-sunk: var(--color-paper-sunk);
+  --color-paper-hover: var(--color-paper-hover);
   --color-rule: var(--color-rule);
   --color-rule-strong: var(--color-rule-strong);
   --color-maroon: var(--color-maroon);
   --color-maroon-ink: var(--color-maroon-ink);
   --color-gold: var(--color-gold);
+  --color-gold-mark: var(--color-gold-mark);
   --color-gold-ink: var(--color-gold-ink);
   --color-ink: var(--color-ink);
   --color-ink-soft: var(--color-ink-soft);
@@ -41,16 +59,19 @@
 body {
   background-color: var(--color-paper);
   color: var(--color-ink);
-  /* The ledger's own baseline grid: ruled paper at a fixed 32px rhythm, the
-     ground every screen in this app is written on. Structural, not
-     decorative — opaque element backgrounds (cards, the sidebar, full-bleed
-     color panels) paint over it where they need a clean field. */
+}
+
+/* The ruled ground is opt-in, not global. It belongs to surfaces that read as
+   a written-on page — the app shell and the landing — and is deliberately
+   absent from the login, where a centred form floating on ruled paper reads
+   as an accident rather than a decision. */
+.ruled {
   background-image: repeating-linear-gradient(
     to bottom,
-    color-mix(in srgb, var(--color-rule) 55%, transparent) 0px,
-    color-mix(in srgb, var(--color-rule) 55%, transparent) 1px,
+    color-mix(in srgb, var(--color-rule) 42%, transparent) 0px,
+    color-mix(in srgb, var(--color-rule) 42%, transparent) 1px,
     transparent 1px,
-    transparent 32px
+    transparent var(--rhythm)
   );
 }
 
@@ -63,9 +84,12 @@ body {
   color: var(--color-paper-raised);
 }
 
+/* Focus is itself a "needs attention" signal — the one sanctioned use of
+   maroon outside status law. Keyboard-only: pointer users never see it. */
 :focus-visible {
   outline: 2px solid var(--color-maroon);
   outline-offset: 2px;
+  border-radius: 2px;
 }
 
 ::-webkit-scrollbar {
@@ -83,4 +107,26 @@ body {
 
 .tabular {
   font-variant-numeric: tabular-nums;
+}
+
+/* Loading skeletons: a bar of sunk paper that breathes. Flat, like
+   everything else — no shimmer gradient sweeping across it. */
+@keyframes pulse-rule {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.45; }
+}
+.skeleton {
+  background-color: var(--color-paper-sunk);
+  border-radius: 3px;
+  animation: pulse-rule 1.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

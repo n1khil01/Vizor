@@ -1,0 +1,38 @@
+{
+  "node": {
+    "00c348b84a39549edc79bf667b8db3ec95063443b0": {
+      "workers": {
+        "app/(dashboard)/tickets/[id]/page": {
+          "moduleId": 73217,
+          "async": false,
+          "codeHash": null
+        }
+      },
+      "exportedName": "signOutAction",
+      "filename": "lib/actions.ts"
+    },
+    "401d55dcf8165866ce68c804113fff53de9240b8c6": {
+      "workers": {
+        "app/(dashboard)/tickets/[id]/page": {
+          "moduleId": 73217,
+          "async": false,
+          "codeHash": null
+        }
+      },
+      "exportedName": "hardResolveTicketAction",
+      "filename": "lib/actions.ts"
+    },
+    "6078932b9c0a5e89e77e6b72a709884e56bb86abcb": {
+      "workers": {
+        "app/(dashboard)/tickets/[id]/page": {
+          "moduleId": 73217,
+          "async": false,
+          "codeHash": null
+        }
+      },
+      "exportedName": "replyToTicketAction",
+      "filename": "lib/actions.ts"
+    }
+  },
+  "edge": {}
+}

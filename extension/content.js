@@ -97,6 +97,7 @@
   let token = null;
   let conversationId = null;
   let streaming = false;
+  const bubbleDot = $("#bubble .dot");
 
   // ── Chrome ────────────────────────────────────────────────────────
 
@@ -112,11 +113,13 @@
     }
   }
 
-  function showChat() {
+  async function showChat() {
     loginView.hidden = true;
     chatView.hidden = false;
     logoutBtn.hidden = false;
     inputEl.focus();
+    const unread = await refreshUnreadBadge();
+    (unread || []).forEach(renderUnreadReply);
   }
 
   async function logout() {
@@ -266,6 +269,66 @@
         errEl.textContent = e.message || "Something went wrong.";
       }
     });
+  }
+
+  // ── Advisor replies (docs/PROJECT_PLAN.md §4.4) ────────────────────
+  // The one thing surfaced proactively rather than on request — an unread
+  // reply sits in the ticket queue same as any other closed loop otherwise.
+
+  function renderUnreadReply(reply) {
+    emptyEl.hidden = true;
+
+    const card = document.createElement("article");
+    card.className = "memo";
+    card.dataset.state = "reply";
+    card.innerHTML = `
+      <div class="memo-head">
+        <span class="memo-kicker">Reply from your advisor</span>
+      </div>
+      <dl class="memo-meta">
+        <dt>Re</dt><dd class="memo-re"></dd>
+      </dl>
+      <p class="memo-body-text"></p>
+      <div class="memo-actions">
+        <button class="btn-primary memo-ack">Mark as read</button>
+      </div>
+    `;
+    card.querySelector(".memo-re").textContent = reply.subject || "Your ticket";
+    card.querySelector(".memo-body-text").textContent = reply.body || "";
+    messagesEl.prepend(card);
+    scrollToEnd();
+
+    card.querySelector(".memo-ack").addEventListener("click", async () => {
+      // GET /tickets/:id marks every advisor message on it read server-side
+      // (app/tickets/service.py:mark_advisor_messages_read) — same call the
+      // `get_ticket` chat tool makes, so "read" means the same thing either
+      // way the student encounters it.
+      try {
+        await fetch(`${VIZOR_API_BASE}/tickets/${reply.ticket_id}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+      } catch {
+        // Best-effort — the card still dismisses locally either way.
+      }
+      card.remove();
+      refreshUnreadBadge();
+    });
+  }
+
+  async function refreshUnreadBadge() {
+    if (!token) return;
+    try {
+      const res = await fetch(`${VIZOR_API_BASE}/auth/me`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (!res.ok) return;
+      const me = await res.json();
+      const unread = me.unread_advisor_replies || [];
+      bubbleDot.hidden = unread.length === 0;
+      return unread;
+    } catch {
+      return [];
+    }
   }
 
   // ── Network ───────────────────────────────────────────────────────

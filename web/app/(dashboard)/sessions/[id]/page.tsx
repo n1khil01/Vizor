@@ -1,7 +1,8 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { getConversation, getConversationMessages } from "@/lib/data";
+import { PageHeader } from "@/components/PageHeader";
+import { firstName } from "@/lib/names";
 
 export const metadata = { title: "Session — Vizor" };
 
@@ -24,71 +25,74 @@ export default async function SessionDetailPage({
   if (!conversation) notFound();
 
   const messages = await getConversationMessages(supabase, id);
+  const studentName = conversation.student?.profile.full_name ?? "Unknown student";
 
   return (
-    <main className="px-8 py-8 max-w-3xl">
-      <Link
-        href="/sessions"
-        className="text-sm text-ink-faint hover:text-ink-soft"
-      >
-        ← Sessions
-      </Link>
+    <>
+      <PageHeader
+        backHref="/sessions"
+        backLabel="Sessions"
+        title={studentName}
+        meta={
+          <>
+            Session started{" "}
+            {new Date(conversation.created_at).toLocaleString("en-US", {
+              month: "short",
+              day: "numeric",
+              hour: "numeric",
+              minute: "2-digit",
+            })}{" "}
+            · {messages.length} {messages.length === 1 ? "message" : "messages"}
+          </>
+        }
+      />
 
-      <header className="mt-4 mb-8">
-        <h1 className="font-serif text-3xl">
-          {conversation.student?.profile.full_name ?? "Unknown student"}
-        </h1>
-        <p className="text-ink-soft mt-1 text-sm">
-          Started{" "}
-          {new Date(conversation.created_at).toLocaleString("en-US", {
-            month: "short",
-            day: "numeric",
-            hour: "numeric",
-            minute: "2-digit",
-          })}
-        </p>
-      </header>
-
-      <ol className="space-y-3">
-        {messages.map((m) => {
-          if (m.role === "tool") {
-            return (
-              <li key={m.id} className="mr-10">
-                <div className="border border-dashed border-rule-strong rounded-lg px-3 py-2 bg-paper">
-                  <p className="text-[11px] uppercase tracking-wide text-ink-faint mb-1">
-                    Vizor checked the record
+      <div className="px-6 py-5 max-w-3xl">
+        {messages.length === 0 ? (
+          <p className="border border-dashed border-rule-strong rounded-lg px-4 py-10 text-center text-sm text-ink-soft">
+            No messages in this session.
+          </p>
+        ) : (
+          /* A transcript is a record, so it reads as one continuous ruled
+             column with a speaker gutter — not as chat bubbles ping-ponging
+             left and right. */
+          <ol className="border border-rule rounded-lg bg-paper-raised divide-y divide-rule overflow-hidden">
+            {messages.map((m) => {
+              if (m.role === "tool") {
+                return (
+                  <li key={m.id} className="bg-paper-sunk/60 px-4 py-2.5">
+                    <p className="text-[10px] font-semibold uppercase tracking-[0.08em] text-ink-faint mb-1">
+                      Vizor checked the record
+                    </p>
+                    <pre className="text-[11px] text-ink-soft overflow-x-auto whitespace-pre-wrap font-mono leading-relaxed">
+                      {toolSummary(m.tool_calls ?? m.content)}
+                    </pre>
+                  </li>
+                );
+              }
+              if (!m.content) return null;
+              const isStudent = m.role === "user";
+              return (
+                <li
+                  key={m.id}
+                  className="px-4 py-3 grid grid-cols-[5.5rem_1fr] gap-3 items-baseline"
+                >
+                  <span
+                    className={`text-[11px] font-semibold uppercase tracking-[0.08em] truncate ${
+                      isStudent ? "text-ink-faint" : "text-ink"
+                    }`}
+                  >
+                    {isStudent ? firstName(studentName) : "Vizor"}
+                  </span>
+                  <p className="text-sm leading-relaxed whitespace-pre-line min-w-0">
+                    {m.content}
                   </p>
-                  <pre className="text-xs text-ink-soft overflow-x-auto whitespace-pre-wrap font-mono">
-                    {toolSummary(m.tool_calls ?? m.content)}
-                  </pre>
-                </div>
-              </li>
-            );
-          }
-          if (!m.content) return null;
-          const isStudent = m.role === "user";
-          return (
-            <li
-              key={m.id}
-              className={`border rounded-lg p-4 ${
-                isStudent
-                  ? "border-rule bg-paper-raised mr-10"
-                  : "border-ink/20 bg-ink/[0.03] ml-10"
-              }`}
-            >
-              <p className="text-[11px] font-medium uppercase tracking-wide text-ink-faint mb-1.5">
-                {isStudent ? conversation.student?.profile.full_name?.split(" ")[0] ?? "Student" : "Vizor"}
-              </p>
-              <p className="text-sm text-ink leading-relaxed whitespace-pre-line">
-                {m.content}
-              </p>
-            </li>
-          );
-        })}
-        {messages.length === 0 && (
-          <p className="text-sm text-ink-faint">No messages in this session.</p>
+                </li>
+              );
+            })}
+          </ol>
         )}
-      </ol>
-    </main>
+      </div>
+    </>
   );
 }
