@@ -207,3 +207,5 @@ backend/cache/
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+HACKATHON_TEST_SCRIPT.md
