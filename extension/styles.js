@@ -174,6 +174,19 @@ const CSS_TEXT = `
 #close:hover { background: var(--gold); color: var(--maroon-deep); }
 #logout { font-size: 9px; letter-spacing: 0.11em; text-transform: uppercase; padding: 6px 8px; }
 #logout[hidden] { display: none; }
+#student-name {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.72);
+  padding: 6px 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100px;
+}
+#student-name[hidden] { display: none; }
 
 /* ── Login: left-aligned editorial, underline fields ───────────── */
 #login-view { flex: 1; min-height: 0; padding: 26px 20px 20px; display: flex; flex-direction: column; }

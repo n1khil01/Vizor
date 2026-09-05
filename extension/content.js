@@ -41,6 +41,7 @@
             <span id="kicker">ASU Advising</span>
           </h1>
           <div id="controls">
+            <span id="student-name" hidden></span>
             <button id="logout" title="Log out" hidden>Log out</button>
             <button id="minimize" title="Minimize" aria-label="Minimize">&minus;</button>
             <button id="close" title="Close" aria-label="Close">&times;</button>
@@ -84,7 +85,7 @@
             <label class="sr-only" for="input">Message Vizor</label>
             <textarea id="input" rows="1" placeholder="Ask about your degree, a form, a deadline&hellip;"></textarea>
             <label id="attach-label" title="Attach a file" aria-label="Attach a file">
-              📎<input id="file-input" type="file" accept=".txt,.md,.csv,.json,.log" multiple hidden />
+              📎<input id="file-input" type="file" accept=".txt,.md,.csv,.json,.log,.pdf" multiple hidden />
             </label>
             <button id="send">Send</button>
           </div>
@@ -103,6 +104,7 @@
   const inputEl = $("#input");
   const sendBtn = $("#send");
   const logoutBtn = $("#logout");
+  const studentNameEl = $("#student-name");
 
   let token = null;
   let conversationId = null;
@@ -151,6 +153,7 @@
     messagesEl.querySelectorAll(".msg, .memo").forEach((el) => el.remove());
     emptyEl.hidden = false;
     logoutBtn.hidden = true;
+    studentNameEl.hidden = true;
     chatView.hidden = true;
     loginView.hidden = false;
   }
@@ -345,6 +348,10 @@
       });
       if (!res.ok) return;
       const me = await res.json();
+      if (me.full_name) {
+        studentNameEl.textContent = me.full_name;
+        studentNameEl.hidden = false;
+      }
       const unread = me.unread_advisor_replies || [];
       bubbleDot.hidden = unread.length === 0;
       return unread;
@@ -487,14 +494,35 @@
     });
   }
 
+  async function extractPdfText(file) {
+    const form = new FormData();
+    form.append("file", file);
+    const res = await fetch(`${VIZOR_API_BASE}/attachments/extract-pdf`, {
+      method: "POST",
+      headers: { Authorization: `Bearer ${token}` },
+      body: form,
+    });
+    if (!res.ok) {
+      const body = await res.json().catch(() => null);
+      throw new Error(body?.detail || "Couldn't read that PDF.");
+    }
+    const { text } = await res.json();
+    return text;
+  }
+
   async function handleFileSelection(files) {
     for (const file of Array.from(files)) {
-      if (file.size > 200_000) {
-        addNote(`${file.name} is too large to attach (200KB max).`);
+      const isPdf = file.type === "application/pdf" || file.name.toLowerCase().endsWith(".pdf");
+      if (file.size > (isPdf ? 8_000_000 : 200_000)) {
+        addNote(`${file.name} is too large to attach (${isPdf ? "8MB" : "200KB"} max).`);
         continue;
       }
-      const text = await file.text();
-      pendingAttachments.push({ filename: file.name, text });
+      try {
+        const text = isPdf ? await extractPdfText(file) : await file.text();
+        pendingAttachments.push({ filename: file.name, text });
+      } catch (e) {
+        addNote(`${file.name}: ${e.message || "couldn't attach that file."}`);
+      }
     }
     renderAttachments();
   }

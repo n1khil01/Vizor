@@ -423,9 +423,3 @@ The two `.claude/launch.json` configurations (`backend`, `web`) start the same t
 **Web app redirect loop back to `/login`.** `web/.env.local` is missing, wrong, or points at a Supabase project that has no seeded profiles. Restart `next dev` after editing it.
 
 **Advisor account can't use the extension.** Correct — `/chat` and `/tickets` require the `student` role. Use a student account.
-
----
-
-## A note on `.gitignore`
-
-`.gitignore` currently contains unresolved merge-conflict markers (`<<<<<<< HEAD` at line 50, `=======` at line 207, with no closing `>>>>>>>`). Git treats them as literal patterns rather than erroring, so the rules around them still apply — but it's worth cleaning up.

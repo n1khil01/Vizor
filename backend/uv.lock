@@ -2029,6 +2029,7 @@ dependencies = [
     { name = "httpx" },
     { name = "openai" },
     { name = "pydantic-settings" },
+    { name = "pypdf" },
     { name = "python-multipart" },
     { name = "pyyaml" },
     { name = "supabase" },
@@ -2039,7 +2040,6 @@ dependencies = [
 dev = [
     { name = "pdfplumber" },
     { name = "psycopg", extra = ["binary"] },
-    { name = "pypdf" },
     { name = "pytest" },
     { name = "trafilatura" },
 ]
@@ -2050,6 +2050,7 @@ requires-dist = [
     { name = "httpx", specifier = ">=0.27" },
     { name = "openai", specifier = ">=1.54" },
     { name = "pydantic-settings", specifier = ">=2.6" },
+    { name = "pypdf", specifier = ">=5.0" },
     { name = "python-multipart", specifier = ">=0.0.12" },
     { name = "pyyaml", specifier = ">=6.0" },
     { name = "supabase", specifier = ">=2.9" },
@@ -2060,7 +2061,6 @@ requires-dist = [
 dev = [
     { name = "pdfplumber", specifier = ">=0.11" },
     { name = "psycopg", extras = ["binary"], specifier = ">=3.3.5" },
-    { name = "pypdf", specifier = ">=5.0" },
     { name = "pytest", specifier = ">=8.3" },
     { name = "trafilatura", specifier = ">=1.12" },
 ]

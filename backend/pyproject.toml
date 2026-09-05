@@ -11,13 +11,13 @@ dependencies = [
     "openai>=1.54",
     "python-multipart>=0.0.12",
     "pyyaml>=6.0",
+    "pypdf>=5.0",
 ]
 
 [tool.uv]
 dev-dependencies = [
     "pytest>=8.3",
     "trafilatura>=1.12",
-    "pypdf>=5.0",
     "pdfplumber>=0.11",
     "psycopg[binary]>=3.3.5",
 ]

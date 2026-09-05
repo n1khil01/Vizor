@@ -13,7 +13,7 @@ import {
 } from "@/components/icons";
 import { VizorMark } from "@/components/VizorMark";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import { signOutAction } from "@/lib/actions";
+import { signOutAction, signOutToHomeAction } from "@/lib/actions";
 
 const NAV = [
   { href: "/dashboard", label: "Overview", Icon: OverviewIcon },
@@ -22,6 +22,22 @@ const NAV = [
   { href: "/sessions", label: "Sessions", Icon: SessionsIcon },
   { href: "/reports", label: "Reports", Icon: ReportsIcon },
 ] as const;
+
+/** Disabled while pending so a double-click can't fire a second sign-out
+    against an already-cleared session. */
+function HomeSignOutButton({ children }: { children: React.ReactNode }) {
+  const { pending } = useFormStatus();
+  return (
+    <button
+      type="submit"
+      disabled={pending}
+      title="Back to Vizor — signs you out"
+      className="flex items-center justify-center sm:justify-start gap-2 w-full rounded-sm disabled:opacity-50"
+    >
+      {children}
+    </button>
+  );
+}
 
 function initials(name: string) {
   const parts = name.replace(/^(Dr|Prof|Mr|Ms|Mrs)\.?\s+/i, "").split(/\s+/);
@@ -33,24 +49,24 @@ export function Sidebar({ advisorName }: { advisorName: string }) {
   return (
     <aside className="w-14 sm:w-56 shrink-0 border-r border-rule bg-paper-raised flex flex-col h-dvh sticky top-0">
       <div className="h-14 flex items-center px-3 sm:px-4 border-b border-rule">
-        {/* The brand mark returns to the public landing page — "Overview"
-            in the nav below is the dedicated in-app home, so this doesn't
-            duplicate it. */}
-        <Link
-          href="/"
-          title="Back to Vizor"
-          className="flex items-center justify-center sm:justify-start gap-2 w-full rounded-sm"
-        >
-          <VizorMark className="h-8 shrink-0" />
-          <span className="hidden sm:flex items-baseline gap-1.5 min-w-0">
-            <span className="font-sans font-bold text-base tracking-tight">
-              Vizor
+        {/* The brand mark leaves the app for the public landing page and
+            signs you out on the way — "Overview" in the nav below is the
+            dedicated in-app home, so this doesn't duplicate it. A form, not
+            a <Link>: Next prefetches links, and this one is in the viewport
+            on every signed-in page, so a logout on GET / would fire itself. */}
+        <form action={signOutToHomeAction} className="w-full">
+          <HomeSignOutButton>
+            <VizorMark className="h-8 shrink-0" />
+            <span className="hidden sm:flex items-baseline gap-1.5 min-w-0">
+              <span className="font-sans font-bold text-base tracking-tight">
+                Vizor
+              </span>
+              <span className="text-[10px] uppercase tracking-[0.14em] text-ink-faint">
+                Advisor
+              </span>
             </span>
-            <span className="text-[10px] uppercase tracking-[0.14em] text-ink-faint">
-              Advisor
-            </span>
-          </span>
-        </Link>
+          </HomeSignOutButton>
+        </form>
       </div>
 
       <nav aria-label="Main" className="flex-1 px-2 py-2 flex flex-col gap-0.5">

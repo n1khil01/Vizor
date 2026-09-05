@@ -20,6 +20,18 @@ export async function signOutStudentAction() {
   redirect("/login/student");
 }
 
+/** The brand mark doubles as a sign-out, so leaving the app for the public
+    landing page ends the session instead of leaving it live behind a page
+    that looks signed-out. This has to be a Server Action rather than a
+    <Link href="/">: Next prefetches links, so a logout that happened on
+    GET / would fire without anyone clicking it, and auth cookies can't be
+    cleared from a Server Component render at all. */
+export async function signOutToHomeAction() {
+  const supabase = await createClient();
+  await supabase.auth.signOut();
+  redirect("/");
+}
+
 /** Every action reports back so the UI can show a real error instead of
     silently doing nothing. */
 export type ActionResult = { ok: true } | { ok: false; error: string };

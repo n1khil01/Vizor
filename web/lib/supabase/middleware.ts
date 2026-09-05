@@ -39,11 +39,18 @@ export async function updateSession(request: NextRequest) {
     return NextResponse.redirect(redirectUrl);
   }
 
-  if (user && request.nextUrl.pathname === "/login") {
-    return NextResponse.redirect(new URL("/dashboard", request.url));
-  }
-  if (user && request.nextUrl.pathname === "/login/student") {
-    return NextResponse.redirect(new URL("/portal", request.url));
+  if (user && (request.nextUrl.pathname === "/login" || request.nextUrl.pathname === "/login/student")) {
+    // Route by actual role, not by which login page they hit — otherwise a
+    // student session landing on /login (or vice versa) bounces to the page
+    // it doesn't belong on, which redirects it right back here, forever.
+    const { data: profile } = await supabase
+      .from("profiles")
+      .select("role")
+      .eq("auth_user_id", user.id)
+      .maybeSingle();
+    return NextResponse.redirect(
+      new URL(profile?.role === "student" ? "/portal" : "/dashboard", request.url),
+    );
   }
 
   return response;

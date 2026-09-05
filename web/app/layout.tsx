@@ -35,7 +35,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       suppressHydrationWarning
       className={`${archivo.variable} ${sourceSerif.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-paper text-ink font-sans">
+      <body
+        className="min-h-full flex flex-col bg-paper text-ink font-sans"
+        suppressHydrationWarning
+      >
         {/* beforeInteractive: Next injects this into <head> and runs it
             before the page becomes interactive, ahead of first paint — a
             plain <script> tag as JSX only executes from the server-rendered
